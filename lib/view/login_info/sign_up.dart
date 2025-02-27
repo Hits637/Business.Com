@@ -3,7 +3,10 @@ import "package:business_dot_com/view/login_info/log_in.dart";
 import "package:business_dot_com/view/widget/custom_snackbar.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 import "package:google_fonts/google_fonts.dart";
 import "package:simple_gradient_text/simple_gradient_text.dart";
@@ -30,337 +33,328 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
-      body: Stack(
-        children: [
-          SizedBox(
-              height: 360,
-              width: 500,
-              child: Image.asset("assets/images/Vector (4).png",
-                  fit: BoxFit.cover)),
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                  ),
-                  Center(
-                    child: SizedBox(
-                      height: 250,
-                      width: 300,
-                      child: Image.asset(
-                        "assets/images/log_signin_bg.png",
-                        //fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            //Vector shape
+            SizedBox(
+                height: 425.h,
+                width: 393.w,
+                child: Image.asset("assets/login_and_signup/signup_vector.png",
+                    fit: BoxFit.cover)),
+            Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: Container(
+                height: 343.h,
+                width: 393.w,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "GET",
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 48,
+                        color: Colors.white,
                       ),
                     ),
+                    Text(
+                      "STARTED",
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 48,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      "Create your Account",
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 6.r, right: 30.r, left: 1.r),
+                  child: SizedBox(
+                    child: Image.asset(
+                      height: 500.h,
+                      width: 364.h,
+                      fit: BoxFit.cover,
+                      "assets/login_and_signup/signup_3Dimg.png",
+                    ),
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  GradientText(
-                    "Get Started",
-                    style: const TextStyle(
-                        fontSize: 27.0, fontWeight: FontWeight.bold),
-                    colors: const [
-                      Color.fromARGB(255, 0, 45, 81),
-                      Color.fromARGB(255, 0, 144, 247),
+                ),
+                // SizedBox(
+                //   height: MediaQuery.sizeOf(context).height / 2.1,
+                // ),
+
+                Container(
+                  height: 42.h,
+                  width: 305.w,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(
+                        10.r), // Rounded corners for smooth UI
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
                     ],
                   ),
-                  const Text(
-                    'by creating a free account',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.grey),
+                  child: TextField(
+                    controller: _emailTextEditingController,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      labelText: 'Email',
+                      labelStyle: GoogleFonts.roboto(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: const Color.fromRGBO(119, 119, 119, 1)),
+                      prefixIcon: Icon(
+                        Icons.email_outlined,
+                        size: 22.r,
+                        color: Color.fromRGBO(36, 89, 171, 1),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                          vertical: 10.h, horizontal: 12.w),
+                      border: InputBorder.none, // No border at all
+                    ),
+                    style: const TextStyle(fontSize: 16, color: Colors.black),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.03,
-                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
 
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(255, 218, 229, 242)
-                                .withOpacity(1),
-                            spreadRadius: 1,
-                            blurRadius: 5,
-                            offset: const Offset(5, 8),
-                          )
-                        ]),
-                    child: TextField(
-                      controller: _emailTextEditingController,
-                      decoration: InputDecoration(
-                        //fillColor: const Color.fromRGBO(170, 196, 243, 1),
-                        //fillColor: const Color.fromARGB(255, 204, 220, 248),
-                        fillColor: Colors.white,
-                        filled: true,
-                        labelText: 'Enter your email',
-                        labelStyle: const TextStyle(
-                          color: Colors.grey,
-                        ),
-                        prefixIcon: const Icon(Icons.email_outlined),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.blue, width: 1.5),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
+                Container(
+                  height: 42.h,
+                  width: 305.w,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
                       ),
-                      style: const TextStyle(fontSize: 18, color: Colors.black),
-                    ),
+                    ],
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
-                  // Container(
-                  //   decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(30),
-                  //       color: Colors.white,
-                  //       boxShadow: [
-                  //         BoxShadow(
-                  //           color: const Color.fromARGB(255, 218, 229, 242)
-                  //               .withOpacity(1),
-                  //           spreadRadius: 1,
-                  //           blurRadius: 5,
-                  //           offset: const Offset(5, 8),
-                  //         )
-                  //       ]),
-                  //   child: TextField(
-                  //     controller: _numberTextEditingController,
-                  //     decoration: InputDecoration(
-                  //       labelText: 'Phone number',
-                  //       labelStyle: const TextStyle(
-                  //         color: Colors.grey,
-                  //       ),
-                  //       fillColor: Colors.white,
-                  //       filled: true,
-                  //       prefixIcon: const Icon(Icons.phone_android_outlined),
-                  //       enabledBorder: OutlineInputBorder(
-                  //         borderSide:
-                  //             const BorderSide(color: Colors.blue, width: 1.5),
-                  //         borderRadius: BorderRadius.circular(30),
-                  //       ),
-                  //     ),
-                  //     style: const TextStyle(fontSize: 18, color: Colors.black),
-                  //   ),
-                  // ),
-                  // SizedBox(
-                  //   height: MediaQuery.of(context).size.height * 0.02,
-                  // ),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(255, 218, 229, 242)
-                                .withOpacity(1),
-                            spreadRadius: 1,
-                            blurRadius: 5,
-                            offset: const Offset(5, 8),
-                          )
-                        ]),
-                    child: TextField(
-                      controller: _passwordTextEditingController,
-                      obscureText:
-                          isVisiblePass, // Controls password visibility
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        labelStyle: const TextStyle(
-                          color: Colors.grey,
-                        ),
-                        fillColor: Colors.white,
-                        filled: true,
-                        prefixIcon: const Icon(Icons.lock_clock_outlined),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            isVisiblePass
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              isVisiblePass = !isVisiblePass;
-                            });
-                          },
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.blue, width: 1.5),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
+                  child: TextField(
+                    controller: _passwordTextEditingController,
+                    obscureText: isVisiblePass, // Toggles password visibility
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      labelText: 'Password',
+                      labelStyle: GoogleFonts.roboto(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: const Color.fromRGBO(119, 119, 119, 1)),
+                      prefixIcon: Icon(
+                        Icons.lock_outline, // Updated icon for better clarity
+                        size: 22.r,
+                        color: Color.fromRGBO(36, 89, 171, 1),
                       ),
-                      style: const TextStyle(fontSize: 18, color: Colors.black),
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(255, 218, 229, 242)
-                                .withOpacity(1),
-                            spreadRadius: 1,
-                            blurRadius: 5,
-                            offset: const Offset(5, 8),
-                          )
-                        ]),
-                    child: TextField(
-                      controller: _confirmPassword,
-                      obscureText:
-                          isVisibleConfirmPass, // Controls password visibility
-                      decoration: InputDecoration(
-                        labelText: 'Confirm Password',
-                        labelStyle: const TextStyle(
-                          color: Colors.grey,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          size: 22.r,
+                          isVisiblePass
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                          color: Colors.grey.shade700,
                         ),
-                        fillColor: Colors.white,
-                        filled: true,
-                        prefixIcon: const Icon(Icons.lock_clock_outlined),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            isVisibleConfirmPass
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              isVisibleConfirmPass = !isVisibleConfirmPass;
-                            });
-                          },
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.blue, width: 1.5),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
+                        onPressed: () {
+                          setState(() {
+                            isVisiblePass = !isVisiblePass;
+                          });
+                        },
                       ),
-                      style: const TextStyle(fontSize: 18, color: Colors.black),
+                      contentPadding: EdgeInsets.symmetric(
+                          vertical: 10.h, horizontal: 12.w),
+                      border: InputBorder.none, // Match email field (No border)
                     ),
+                    style: const TextStyle(fontSize: 16, color: Colors.black),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.03,
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Container(
+                  height: 42.h,
+                  width: 305.w,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
-                  //const Spacer(),
-                  GestureDetector(
-                    onTap: () async {
-                      if (_numberTextEditingController.text.trim().isNotEmpty) {
-                        Map<String, dynamic> data = {
-                          // "Mo. Number ":
-                          //     _numberTextEditingController.text.trim(),
-                          "Email ": _emailTextEditingController.text.trim(),
-                        };
-                        FirebaseFirestore.instance
-                            .collection("CompanyDetails")
-                            .doc("$_emailTextEditingController")
-                            .set(data);
-                      }
-                      if (_emailTextEditingController.text.trim().isNotEmpty &&
-                          _passwordTextEditingController.text
-                              .trim()
-                              .isNotEmpty) {
-                        try {
-                          UserCredential userCredential = await _firebaseAuth
-                              .createUserWithEmailAndPassword(
-                                  email:
-                                      _emailTextEditingController.text.trim(),
-                                  password: _passwordTextEditingController.text
-                                      .trim());
-                          log("User Credential : $userCredential");
-                          CustomSnackBar.showCustomSnackbar(
-                            message: "User Register Successfully",
-                            context: context,
-                          );
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => const LogIn()));
-                        } on FirebaseAuthException catch (error) {
-                          print("${error.code}");
-                          print("${error.message}");
-                          CustomSnackBar.showCustomSnackbar(
-                            message: error.message!,
-                            context: context,
-                          );
-                        }
-                      } else {
+                  child: TextField(
+                    controller: _confirmPassword,
+                    obscureText:
+                        isVisibleConfirmPass, // Toggles password visibility
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      labelText: 'Confirm Password',
+                      labelStyle: GoogleFonts.roboto(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: const Color.fromRGBO(119, 119, 119, 1)),
+                      prefixIcon: Icon(
+                        Icons.lock_outline, // Updated icon for better clarity
+                        size: 22.r,
+                        color: Color.fromRGBO(36, 89, 171, 1),
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          size: 22.r,
+                          isVisibleConfirmPass
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                          color: Colors.grey.shade700,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            isVisibleConfirmPass = !isVisibleConfirmPass;
+                          });
+                        },
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                          vertical: 10.h, horizontal: 12.w),
+                      border: InputBorder.none, // Match email field (No border)
+                    ),
+                    style: const TextStyle(fontSize: 16, color: Colors.black),
+                  ),
+                ),
+                SizedBox(
+                  height: 35.h,
+                ),
+
+                GestureDetector(
+                  onTap: () async {
+                    if (_numberTextEditingController.text.trim().isNotEmpty) {
+                      Map<String, dynamic> data = {
+                        // "Mo. Number ":
+                        //     _numberTextEditingController.text.trim(),
+                        "Email ": _emailTextEditingController.text.trim(),
+                      };
+                      FirebaseFirestore.instance
+                          .collection("CompanyDetails")
+                          .doc("$_emailTextEditingController")
+                          .set(data);
+                    }
+                    if (_emailTextEditingController.text.trim().isNotEmpty &&
+                        _passwordTextEditingController.text.trim().isNotEmpty) {
+                      try {
+                        UserCredential userCredential =
+                            await _firebaseAuth.createUserWithEmailAndPassword(
+                                email: _emailTextEditingController.text.trim(),
+                                password:
+                                    _passwordTextEditingController.text.trim());
+                        log("User Credential : $userCredential");
                         CustomSnackBar.showCustomSnackbar(
-                          message: "Please enter valid fields",
+                          message: "User Register Successfully",
+                          context: context,
+                        );
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => const LogIn()));
+                      } on FirebaseAuthException catch (error) {
+                        print("${error.code}");
+                        print("${error.message}");
+                        CustomSnackBar.showCustomSnackbar(
+                          message: error.message!,
                           context: context,
                         );
                       }
-                    },
-                    child: Container(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width - 20,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          // colors for gradient
-                          colors: [
-                            Color.fromARGB(255, 0, 45, 81),
-                            Color.fromARGB(255, 0, 144, 247),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.blue,
+                    } else {
+                      CustomSnackBar.showCustomSnackbar(
+                        message: "Please enter valid fields",
+                        context: context,
+                      );
+                    }
+                  },
+                  child: Container(
+                    height: 50.h,
+                    width: 300.w,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        // colors for gradient
+                        colors: [
+                          Color.fromRGBO(1, 31, 107, 1),
+                          Color.fromRGBO(70, 145, 232, 1),
+                        ],
                       ),
-                      child: Center(
-                        child: Text(
-                          'Signup',
-                          style: GoogleFonts.abhayaLibre(
-                            textStyle: TextStyle(
-                                fontSize: screenWidth * 0.07,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
+                      borderRadius: BorderRadius.circular(10.r),
+                      color: Colors.blue,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Signup',
+                        style: GoogleFonts.roboto(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromRGBO(255, 255, 255, 1),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.01,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Already a member? ',
-                        style: TextStyle(
-                            fontSize: 12,
-                            //fontWeight: FontWeight.bold,
-                            color: Colors.black),
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already a Member ? ',
+                      style: GoogleFonts.roboto(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.grey),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LogIn()));
+                        setState(() {});
+                      },
+                      child: Text(
+                        'Log In',
+                        style: GoogleFonts.roboto(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w900,
+                            color: Color.fromRGBO(36, 89, 171, 1)),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LogIn()));
-                          setState(() {});
-                        },
-                        child: const Text(
-                          'Log In',
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blue),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

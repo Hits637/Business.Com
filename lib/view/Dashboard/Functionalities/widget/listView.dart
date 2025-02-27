@@ -2,6 +2,9 @@ import 'package:business_dot_com/model/comp_detail_model.dart';
 import 'package:business_dot_com/view/Dashboard/CompDetails/description.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 class MyWidget extends StatefulWidget {
   final String? email;
   final int majorListIndex;
@@ -26,55 +29,23 @@ class _MyWidgetState extends State<MyWidget> {
   int? highlightedIndex;
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      color: Colors.white,
-      height: screenHeight * 0.44,
+      color: Colors.transparent,
+      height: 220.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: majorCompDetailModelList[majorListIndex].length,
         itemBuilder: (context, int index) {
           return GestureDetector(
-            onTapDown: (_) {
-              setState(
-                () {
-                  highlightedIndex = index;
-                },
-              );
-            },
             child: Padding(
-              padding: EdgeInsets.all(screenWidth * 0.01),
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    height: screenHeight * 0.42, // Dynamic card height
-                    width: screenWidth * 0.8,
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: highlightedIndex == index
-                                ? const Color.fromARGB(255, 200, 225, 245)
-                                    .withOpacity(0.5)
-                                : const Color.fromARGB(255, 180, 178, 178)
-                                    .withOpacity(0.5),
-                            //spreadRadius: 4,
-                            blurRadius: 4,
-                            offset: const Offset(4, 7),
-                          ),
-                        ],
-                        border: Border.all(
-                          width: 1.5,
-                          color: highlightedIndex == index
-                              ? const Color.fromARGB(255, 207, 228, 245)
-                              : const Color.fromARGB(255, 33, 150, 243),
-                        ),
-                        color: highlightedIndex == index
-                            ? const Color.fromARGB(255, 207, 228, 245)
-                            : const Color.fromRGBO(255, 255, 255, 1),
-                        borderRadius: BorderRadius.circular(10)),
+                  SizedBox(
+                    height: 215.h, // Dynamic card height
+                    width: 230.w,
+
                     child: GestureDetector(
                       onTap: () async {
                         Navigator.push(
@@ -87,84 +58,106 @@ class _MyWidgetState extends State<MyWidget> {
                           ),
                         );
                       },
-                      child: Column(
+                      child: Stack(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(screenWidth * 0.01),
-                            child: SizedBox(
-                              height: screenHeight * 0.21,
-                              width: screenWidth * 0.7,
-                              child: Image.network(
-                                majorCompDetailModelList[majorListIndex][index]
-                                    .compLogo,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(screenWidth * 0.02),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
+                            padding: const EdgeInsets.only(top: 30),
+                            child: Container(
+                              height: 190.h,
+                              width: 226.w,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  boxShadow: [
+                                    const BoxShadow(
+                                        blurRadius: 4,
+                                        offset: Offset(2, 3),
+                                        color: Colors.grey),
+                                  ],
+                                  color: Colors.white),
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 70.r, left: 20.r),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       //compShortDetailList[index].organizationName,
                                       majorCompDetailModelList[majorListIndex]
                                               [index]
                                           .organizationName!,
-                                      style: TextStyle(
-                                        fontSize: screenWidth * 0.04,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 20,
                                         fontWeight: FontWeight.w700,
                                         color: Colors.black,
                                       ),
                                     ),
-                                    const Spacer(),
-                                    const Icon(Icons.location_on),
                                     Text(
-                                      // compShortDetailList[index].city,
+                                      //compShortDetailList[index].pitch,
                                       majorCompDetailModelList[majorListIndex]
                                               [index]
-                                          .city,
-                                      style: TextStyle(
-                                        fontSize: screenWidth * 0.035,
+                                          .pitchTextEditingController,
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12,
                                         color: Colors.black,
                                       ),
                                     ),
+                                    Text(
+                                      "Revenue:${majorCompDetailModelList[majorListIndex][index].revenue}",
+                                      //{compShortDetailList[index].revenue}",
+
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Looking for :${majorCompDetailModelList[majorListIndex][index].investmentRange == "" ? "Partner" : " investor"}",
+                                      //{compShortDetailList[index].revenue}",
+
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        const Icon(
+                                          Icons.location_on_outlined,
+                                          size: 12,
+                                        ),
+                                        Text(
+                                          // compShortDetailList[index].city,
+                                          majorCompDetailModelList[
+                                                  majorListIndex][index]
+                                              .city,
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
-                                SizedBox(height: screenHeight * 0.01),
-                                Text(
-                                  //compShortDetailList[index].pitch,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 70.w),
+                            child: ClipOval(
+                              child: Image.network(
                                   majorCompDetailModelList[majorListIndex]
                                           [index]
-                                      .pitchTextEditingController,
-                                  style: TextStyle(
-                                    fontSize: screenWidth * 0.035,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                SizedBox(height: screenHeight * 0.01),
-                                Text(
-                                  "Revenue:${majorCompDetailModelList[majorListIndex][index].revenue}",
-                                  //{compShortDetailList[index].revenue}",
-
-                                  style: TextStyle(
-                                    fontSize: screenWidth * 0.035,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                SizedBox(height: screenHeight * 0.001),
-                                Text(
-                                  "Looking for :${majorCompDetailModelList[majorListIndex][index].investmentRange == "" ? "Partner" : " investor"}",
-                                  //{compShortDetailList[index].revenue}",
-
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                  ),
-                                )
-                              ],
+                                      .compLogo,
+                                  height: 90.h,
+                                  width: 90.h,
+                                  fit: BoxFit.cover),
                             ),
                           ),
                         ],

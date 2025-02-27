@@ -4,7 +4,8 @@ import 'package:business_dot_com/view/Dashboard/Business_Registration/form1.dart
 import 'package:business_dot_com/view/Dashboard/Drawer/drawer.dart';
 import 'package:business_dot_com/view/Dashboard/Functionalities/widget/listView.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 import '../../../../model/comp_detail_model.dart';
@@ -91,9 +92,9 @@ class _HomePageControllerState extends State<HomePageController> {
     '3D Printing and Additive Manufacturing',
     'Security Services and Systems',
   ];
-  final TextEditingController _searchController = TextEditingController();
 
   List<String> filteredItems = [];
+
   @override
   void initState() {
     super.initState();
@@ -119,138 +120,85 @@ class _HomePageControllerState extends State<HomePageController> {
   }
 
   _HomePageControllerState({required this.email});
+
   @override
   Widget build(BuildContext context) {
-    String? email;
     return Scaffold(
-      backgroundColor: Colors.white,
-      drawer: const DrawerPage(),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            iconTheme: const IconThemeData(
-              color: Colors.white,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        title: Row(
+          children: [
+            Spacer(),
+            const Text(
+              "Business.com",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
             ),
-            expandedHeight: 80.0, // Adjusted height
-            floating: true,
-            pinned: true,
-            flexibleSpace: ClipPath(
-              //clipper: CustomAppBarClipper(), // Curved bottom
-              child: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    // colors for gradient
-                    colors: [
-                      Color.fromARGB(255, 0, 45, 81),
-                      Color.fromARGB(255, 0, 144, 247),
-                    ],
-                  ),
-                ),
-                child: const SafeArea(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    //crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Business.com",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                        //textAlign: TextAlign.end,
-                      ),
-                    ],
-                  ),
-                ),
+            Spacer(),
+            Padding(
+              padding: EdgeInsets.only(right: 1.r),
+              child: Icon(
+                Icons.search,
+                size: 26,
+                color: Colors.white,
               ),
             ),
-            backgroundColor: Colors.transparent,
-            centerTitle: true,
-          ),
-          //  SliverToBoxAdapter(
-          //   child:SizedBox(height:20),
-          // ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Container(
-                width: 360,
-                height: 50,
-                decoration: BoxDecoration(
-                  // Gradient applied to the border
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 0, 45, 81),
-                      Color.fromARGB(255, 0, 144, 247),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                //padding: const EdgeInsets.symmetric(horizontal: 20),
-                padding: const EdgeInsets.all(2),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: TextField(
-                    controller: _searchController,
-                    onChanged: _onSearchChanged, // Trigger search logic
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.search, color: Colors.blue),
-                      contentPadding: EdgeInsets.symmetric(vertical: 10.0),
-                      hintStyle: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                      ),
-                      border: InputBorder.none,
-                      hintText: 'Search...',
-                    ),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16, left: 8),
-                      child: GradientText(
-                        domainList[index],
-                        colors: const [
-                          Color.fromARGB(255, 0, 45, 81),
-                          Color.fromARGB(255, 0, 144, 247),
-                        ],
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    MyWidget(
-                      email: email, // Replace with dynamic data
-                      majorListIndex: index, // Pass index or other dynamic data
-                    ),
-                  ],
-                );
-              },
-              childCount: domainList.length,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
+      backgroundColor: Colors.transparent,
+      drawer: const DrawerPage(),
+      body: Stack(children: [
+        Image.asset(
+          "assets/images/main_dashboard_vector.png",
+          height: 393.w,
+          width: 393.w,
+          fit: BoxFit.cover,
+        ),
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 40.w, top: 90.h),
+                child: Image.asset("assets/images/dashboard_3Dimg.png"),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: List.generate(
+                  domainList.length,
+                  (index) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15, left: 15),
+                        child: Text(
+                          domainList[index],
+                          style: GoogleFonts.poppins(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10.h),
+                      MyWidget(
+                        email: email,
+                        majorListIndex: index,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           log("$email");
@@ -272,95 +220,3 @@ class _HomePageControllerState extends State<HomePageController> {
     );
   }
 }
-
-
-
-//           SliverToBoxAdapter(
-//             child: Padding(
-//               padding: const EdgeInsets.only(top: 2, left: 8),
-//               child: GradientText(
-//                 "Hospitality and Tourism",
-//                 colors: const [
-//                   Color.fromARGB(255, 0, 45, 81),
-//                   Color.fromARGB(255, 0, 144, 247),
-//                 ],
-//                 style: const TextStyle(
-//                   fontSize: 20,
-//                   fontWeight: FontWeight.w900,
-//                 ),
-//               ),
-//             ),
-//           ),
-//           SliverToBoxAdapter(
-//             child: MyWidget(
-//               email: email,
-//               majorListIndex: 1,
-//             ),
-//           ),
-//           SliverToBoxAdapter(
-//             child: Padding(
-//               padding: const EdgeInsets.only(top: 2, left: 8),
-//               child: GradientText(
-//                 "Food and Beverages",
-//                 colors: const [
-//                   Color.fromARGB(255, 0, 45, 81),
-//                   Color.fromARGB(255, 0, 144, 247),
-//                 ],
-//                 style: const TextStyle(
-//                   fontSize: 20,
-//                   fontWeight: FontWeight.w900,
-//                 ),
-//               ),
-//             ),
-//           ),
-//           SliverToBoxAdapter(
-//             child: MyWidget(
-//               email: email,
-//               majorListIndex: 2,
-//             ),
-//           ),
-//           SliverToBoxAdapter(
-//             child: Padding(
-//               padding: const EdgeInsets.only(top: 2, left: 8),
-//               child: GradientText(
-//                 "Helthcare and Pharmaceuticals",
-//                 colors: const [
-//                   Color.fromARGB(255, 0, 45, 81),
-//                   Color.fromARGB(255, 0, 144, 247),
-//                 ],
-//                 style: const TextStyle(
-//                   fontSize: 20,
-//                   fontWeight: FontWeight.w900,
-//                 ),
-//               ),
-//             ),
-//           ),
-//           SliverToBoxAdapter(
-//             child: MyWidget(
-//               email: email,
-//               majorListIndex: 3,
-//             ),
-//           ),
-//         ],
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: () {
-//           log("$email");
-//           Navigator.of(context).push(
-//             MaterialPageRoute(
-//               builder: (context) {
-//                 return RegistrationForm(email: email);
-//               },
-//             ),
-//           );
-//         },
-//         backgroundColor: Colors.white,
-//         child: const Icon(
-//           Icons.add,
-//           size: 45,
-//           color: Colors.blue,
-//         ),
-//       ),
-//     );
-//   }
-// }

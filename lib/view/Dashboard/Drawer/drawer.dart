@@ -3,7 +3,9 @@ import 'package:business_dot_com/view/Dashboard/Drawer/Gov_Schemes/all_scheme_ch
 import 'package:business_dot_com/view/Dashboard/Drawer/Help&Support/help_and_support.dart';
 import 'package:business_dot_com/view/Dashboard/Drawer/News/news_screen.dart';
 import 'package:business_dot_com/view/login_info/log_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DrawerPage extends StatefulWidget {
@@ -17,288 +19,191 @@ class _DrawerPageState extends State<DrawerPage> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: 300.w,
       surfaceTintColor: Colors.white,
       backgroundColor: Colors.white,
-      child: ListView(
-        padding: EdgeInsets.zero,
+      child: Stack(
         children: [
-          Container(
-            height: MediaQuery.sizeOf(context).height / 8,
-            child: DrawerHeader(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  // colors for gradient
-                  colors: [
-                    Color.fromARGB(255, 0, 45, 81),
-                    Color.fromARGB(255, 0, 144, 247),
+          SizedBox(
+              width: MediaQuery.sizeOf(context).width,
+              child: Image.asset("assets/drawer/drawer_vector.png",
+                  fit: BoxFit.cover)),
+          ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              Container(
+                height: MediaQuery.sizeOf(context).height / 8,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(width: 10),
+                    Text(
+                      'BUSINESS.COM',
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24,
+                        color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
-                color: Color.fromRGBO(32, 103, 234, 1),
               ),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.white,
-                    child: ShaderMask(
-                      shaderCallback: (Rect bounds) {
-                        return const LinearGradient(
-                          colors: [
-                            Color.fromARGB(255, 0, 45, 81),
-                            Color.fromARGB(255, 0, 144, 247),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ).createShader(bounds);
-                      },
-                      child: const Icon(
-                        Icons.home,
-                        color: Colors
-                            .white, // Base color (acts as a mask for the gradient)
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Text(
-                    'HOME',
-                    style: GoogleFonts.abhayaLibre(
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          ListTile(
-            leading: Container(
-              height: 50,
-              width: 50,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-              ),
-              child: ShaderMask(
-                shaderCallback: (Rect bounds) {
-                  return const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 0, 45, 81),
-                      Color.fromARGB(255, 0, 144, 247),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ).createShader(bounds);
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const AllSchemeChatagory()));
                 },
-                child: const Icon(
-                  Icons.account_balance,
-                  color: Colors.white, // Base color to act as the mask
-                  size: 30,
-                ),
-              ),
-            ),
-            title: Text(
-              'Government Scheme',
-              style: GoogleFonts.abhayaLibre(
-                textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => AllSchemeChatagory()));
-            },
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          ListTile(
-            leading: Container(
-              height: 50,
-              width: 50,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-              ),
-              child: ShaderMask(
-                shaderCallback: (Rect bounds) {
-                  return const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 0, 45, 81),
-                      Color.fromARGB(255, 0, 144, 247),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ).createShader(bounds);
-                },
-                child: const Icon(
-                  Icons.newspaper,
-                  color: Colors.white, // Base color to act as the mask
-                  size: 30,
-                ),
-              ),
-            ),
-            title: Text(
-              'News Section',
-              style: GoogleFonts.abhayaLibre(
-                textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => NewsScreen()));
-            },
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          ListTile(
-            leading: Container(
-              height: 50,
-              width: 50,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-              ),
-              child: ShaderMask(
-                shaderCallback: (Rect bounds) {
-                  return const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 0, 45, 81),
-                      Color.fromARGB(255, 0, 144, 247),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ).createShader(bounds);
-                },
-                child: const Icon(
-                  Icons.help,
-                  color: Colors.white, // Base color to act as the mask
-                  size: 30,
-                ),
-              ),
-            ),
-            title: Text(
-              'Help',
-              style: GoogleFonts.abhayaLibre(
-                textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const HelpPage(),
-                ),
-              );
-            },
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          ListTile(
-            leading: Container(
-              height: 50,
-              width: 50,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-              ),
-              child: ShaderMask(
-                shaderCallback: (Rect bounds) {
-                  return const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 0, 45, 81),
-                      Color.fromARGB(255, 0, 144, 247),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ).createShader(bounds);
-                },
-                child: const Icon(
-                  Icons.info,
-                  color: Colors.white, // Base color to act as the mask
-                  size: 30,
-                ),
-              ),
-            ),
-            title: Text(
-              'About Us',
-              style: GoogleFonts.abhayaLibre(
-                textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const AboutUsPage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: GestureDetector(
-              onTap: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LogIn()),
-                  (route) =>
-                      false, // This removes all previous routes from the stack
-                );
-              },
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
-                child: ShaderMask(
-                  shaderCallback: (Rect bounds) {
-                    return const LinearGradient(
-                      colors: [
-                        Color.fromARGB(255, 0, 45, 81),
-                        Color.fromARGB(255, 0, 144, 247),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: SizedBox(
+                    height: 45,
+                    child: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Icon(
+                            Icons.account_balance_outlined,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          "Government Schemes",
+                          style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white),
+                        )
                       ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ).createShader(bounds);
-                  },
-                  child: const Icon(
-                    Icons.logout,
-                    color: Colors.white, // Base color to act as the mask
-                    size: 30,
+                    ),
                   ),
                 ),
               ),
-            ),
-            title: Text(
-              'LogOut',
-              style: GoogleFonts.abhayaLibre(
-                textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => NewsScreen()));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: SizedBox(
+                    height: 45,
+                    child: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Icon(
+                            Icons.newspaper_outlined,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          "News Section",
+                          style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const HelpPage()));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: SizedBox(
+                    height: 45,
+                    child: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Icon(
+                            Icons.help,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          "Help",
+                          style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const AboutUsPage()));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: SizedBox(
+                    height: 45,
+                    child: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Icon(
+                            Icons.info,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          "About Us",
+                          style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const LogIn()));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: SizedBox(
+                    height: 45,
+                    child: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Icon(
+                            Icons.logout,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          "LogOut",
+                          style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

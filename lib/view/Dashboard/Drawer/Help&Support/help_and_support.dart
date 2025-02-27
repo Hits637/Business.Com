@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class HelpPage extends StatelessWidget {
@@ -7,36 +10,7 @@ class HelpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios_new_sharp,
-            color: Colors.white,
-          ),
-        ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 0, 45, 81),
-                Color.fromARGB(255, 0, 144, 247),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-        title: const Text(
-          "Help & Support",
-          style: TextStyle(color: Colors.white),
-        ),
-        centerTitle: true,
-      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -44,52 +18,77 @@ class HelpPage extends StatelessWidget {
             Center(
               child: Column(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Image.asset(
-                      "assets/Gov_schemes_logo/help.jpg",
-                      height: 200.0,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  ShaderMask(
-                    shaderCallback: (bounds) => const LinearGradient(
-                      colors: [
-                        Color.fromARGB(255, 0, 45, 81),
-                        Color.fromARGB(255, 0, 144, 247),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ).createShader(bounds),
-                    child: const Text(
-                      "How can we assist you?",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                  Stack(
+                    children: [
+                      SizedBox(
+                        width: 393.w,
+                        child: Image.asset(
+                            "assets/drawer/help_support/help_vector.png",
+                            fit: BoxFit.cover),
                       ),
-                    ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 60.h),
+                        child: SizedBox(
+                          width: 393.w,
+                          child: Image.asset(
+                              "assets/drawer/help_support/collabration_img_help.png"),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 65.h, left: 10.w),
+                          child: SizedBox(
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.arrow_back_ios_new_outlined,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
+                                Text(
+                                  "back",
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 60.h),
+                          child: Text(
+                            "Help & Support",
+                            style: GoogleFonts.roboto(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 24.0),
 
             // FAQs Section
-            GradientText(
-              "Frequently Asked Questions",
-              style: const TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
+            Center(
+              child: Text(
+                "Frequently Asked Questions",
+                style: GoogleFonts.roboto(
+                    fontSize: 26.0,
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromRGBO(36, 89, 171, 1)),
               ),
-              colors: const [
-                Color.fromARGB(255, 0, 45, 81),
-                Color.fromARGB(255, 0, 144, 247),
-              ],
             ),
-            const SizedBox(height: 8.0),
+            SizedBox(height: 20.h),
             const FAQItem(
               question: "How do I use the Partner Connect feature?",
               answer:
@@ -105,76 +104,88 @@ class HelpPage extends StatelessWidget {
               answer:
                   "Visit the Government Schemes section in the app for the latest programs tailored for businesses like yours.",
             ),
-            const SizedBox(height: 24.0),
+            SizedBox(height: 20.h),
 
             // Contact Support Section
-            ShaderMask(
-              shaderCallback: (bounds) => const LinearGradient(
-                colors: [
-                  Color.fromARGB(255, 0, 45, 81),
-                  Color.fromARGB(255, 0, 144, 247),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ).createShader(bounds),
-              child: const Text(
+            Center(
+              child: Text(
                 "Contact Support",
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+                style: GoogleFonts.roboto(
+                    fontSize: 26.0,
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromRGBO(36, 89, 171, 1)),
               ),
             ),
             const SizedBox(height: 8.0),
-            const Text(
-              "Need further assistance? Our support team is here to help:",
-              style: TextStyle(fontSize: 16.0),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14.w),
+              child: Text(
+                "Need further assistance? Our support team is here to help:",
+                style: GoogleFonts.inter(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
-            const SizedBox(height: 8.0),
-            const ListTile(
-              leading: Icon(Icons.email, color: Color.fromARGB(255, 0, 45, 81)),
-              title: Text("Email: Ruchikapatil66@gmail.com"),
+            SizedBox(height: 8.0.h),
+            ListTile(
+              leading: Icon(Icons.email, color: Color.fromRGBO(36, 89, 171, 1)),
+              title: Text(
+                "Email: Ruchikapatil66@gmail.com",
+                style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w400, fontSize: 14.0),
+              ),
             ),
-            const ListTile(
-              leading:
-                  Icon(Icons.phone, color: Color.fromARGB(255, 0, 144, 247)),
-              title: Text("Phone: +918999224867"),
+            ListTile(
+              leading: Icon(Icons.phone, color: Color.fromRGBO(36, 89, 171, 1)),
+              title: Text("Phone: +918999224867",
+                  style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w400, fontSize: 14.0)),
             ),
 
             const SizedBox(height: 24.0),
 
             // Guides and Resources Section
-            GradientText(
-              "Guides & Resources",
-              style: const TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
+            Center(
+              child: Text(
+                "Guides & Resources",
+                style: GoogleFonts.roboto(
+                    fontSize: 26.0,
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromRGBO(36, 89, 171, 1)),
               ),
-              colors: const [
-                Color.fromARGB(255, 0, 45, 81),
-                Color.fromARGB(255, 0, 144, 247),
-              ],
             ),
             const SizedBox(height: 8.0),
-            const Text(
-              "Explore our detailed guides to get the most out of the app:",
-              style: TextStyle(fontSize: 16.0),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14.w),
+              child: Text(
+                "Explore our detailed guides to get the most out of the app:",
+                style: GoogleFonts.inter(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
-            const ListTile(
+            ListTile(
               leading:
                   Icon(Icons.book, color: Color.fromARGB(255, 0, 144, 247)),
-              title: Text("Getting Started with business.com"),
+              title: Text("Getting Started with business.com",
+                  style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w400, fontSize: 14.0)),
             ),
-            const ListTile(
+            ListTile(
               leading:
                   Icon(Icons.search, color: Color.fromARGB(255, 0, 45, 81)),
-              title: Text("How to Find the Right Investor"),
+              title: Text("How to Find the Right Investor",
+                  style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w400, fontSize: 14.0)),
             ),
-            const ListTile(
+            ListTile(
               leading:
                   Icon(Icons.link, color: Color.fromARGB(255, 0, 144, 247)),
-              title: Text("Connecting with Government Schemes"),
+              title: Text("Connecting with Government Schemes",
+                  style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w400, fontSize: 14.0)),
             ),
           ],
         ),
@@ -194,21 +205,28 @@ class FAQItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
+      padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            question,
-            style: const TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
+          Padding(
+            padding: EdgeInsets.only(left: 14.r),
+            child: Text(
+              question,
+              style: GoogleFonts.inter(
+                fontSize: 15.0,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
-          const SizedBox(height: 4.0),
-          Text(
-            answer,
-            style: const TextStyle(fontSize: 16.0),
+          SizedBox(height: 4.0.h),
+          Padding(
+            padding: EdgeInsets.only(left: 24.r),
+            child: Text(
+              answer,
+              style: GoogleFonts.inter(
+                  fontWeight: FontWeight.w400, fontSize: 12.0),
+            ),
           ),
         ],
       ),

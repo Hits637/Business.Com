@@ -26,6 +26,7 @@ dependencies:
   flutter_year_picker: ^0.0.1
   month_year_picker: ^0.4.0+1
   http: ^1.3.0
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
@@ -41,6 +42,8 @@ flutter:
     - assets/images/logos/
     - assets/Gov_schemes_logo/
     - assets/login_and_signup/
+    - assets/drawer/
+    - assets/drawer/help_support/
     
   fonts:
     - family: Bulletto
