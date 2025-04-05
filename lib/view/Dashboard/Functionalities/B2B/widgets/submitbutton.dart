@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../Controller/comp_image_dao.dart';
-import '../../../../widget/custom_snackbar.dart';
+import '../../../../../Components/custom_snackbar.dart';
 import '../b2b_form1.dart';
 import '../b2b_page.dart';
 
@@ -86,7 +86,8 @@ class Submitbutton {
           );
         } else {
           CustomSnackBar.showCustomSnackbar(
-              message: "Please enter valid Data", context: context);
+            title: "Oppsss...",
+              message: "Please enter valid Data");
         }
       },
       child: Container(

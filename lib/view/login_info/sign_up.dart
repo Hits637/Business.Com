@@ -1,6 +1,6 @@
 import "dart:developer";
 import "package:business_dot_com/view/login_info/log_in.dart";
-import "package:business_dot_com/view/widget/custom_snackbar.dart";
+import "package:business_dot_com/Components/custom_snackbar.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/cupertino.dart";
@@ -265,7 +265,9 @@ class _SignUpState extends State<SignUp> {
                           .set(data);
                     }
                     if (_emailTextEditingController.text.trim().isNotEmpty &&
-                        _passwordTextEditingController.text.trim().isNotEmpty) {
+                        _passwordTextEditingController.text.trim().isNotEmpty &&
+                        _passwordTextEditingController.text ==
+                            _confirmPassword.text) {
                       try {
                         UserCredential userCredential =
                             await _firebaseAuth.createUserWithEmailAndPassword(
@@ -274,23 +276,23 @@ class _SignUpState extends State<SignUp> {
                                     _passwordTextEditingController.text.trim());
                         log("User Credential : $userCredential");
                         CustomSnackBar.showCustomSnackbar(
-                          message: "User Register Successfully",
-                          context: context,
+                          title: "Congratulatins!!!",
+                          message: "Registration Succesfull...",
                         );
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => const LogIn()));
                       } on FirebaseAuthException catch (error) {
-                        print("${error.code}");
-                        print("${error.message}");
+                        log("${error.code}");
+                        log("${error.message}");
                         CustomSnackBar.showCustomSnackbar(
+                          title: error.code,
                           message: error.message!,
-                          context: context,
                         );
                       }
                     } else {
                       CustomSnackBar.showCustomSnackbar(
+                        title: "Oppsss...",
                         message: "Please enter valid fields",
-                        context: context,
                       );
                     }
                   },

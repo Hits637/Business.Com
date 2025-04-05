@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
-import '../../widget/custom_snackbar.dart';
-import '../../../Controller/text_editing_controller.dart';
+import '../../../Components/custom_snackbar.dart';
+import '../../../Components/text_editing_controller.dart';
 
 class Form2 extends StatefulWidget {
   final String? email;
@@ -304,8 +304,9 @@ class _Form2State extends State<Form2> {
                               bottomSheetpartner(context, email: email);
                             } else {
                               CustomSnackBar.showCustomSnackbar(
-                                  message: "Please enter valid Data",
-                                  context: context);
+                                title: "Oppsss...",
+                                message: "Please enter valid Data",
+                              );
                             }
                           },
                           child: Container(
@@ -356,8 +357,9 @@ class _Form2State extends State<Form2> {
                               bottomSheet(context, email: email);
                             } else {
                               CustomSnackBar.showCustomSnackbar(
-                                  message: "Please enter valid Data",
-                                  context: context);
+                                title: "Oppsss...",
+                                message: "Please enter valid Data",
+                              );
                             }
                           },
                           child: Container(

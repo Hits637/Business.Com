@@ -1,13 +1,9 @@
-import 'package:business_dot_com/view/Dashboard/Drawer/Gov_Schemes/all_scheme_chatagory.dart';
-import 'package:business_dot_com/view/Dashboard/Drawer/Help&Support/help_and_support.dart';
-import 'package:business_dot_com/view/Dashboard/Drawer/drawer.dart';
-import 'package:business_dot_com/view/Dashboard/Functionalities/widget/dashbard_listview.dart';
-import 'package:business_dot_com/view/login_info/log_in.dart';
-import 'package:business_dot_com/view/login_info/sign_up.dart';
+import 'package:business_dot_com/Controller/data_controller.dart';
 import 'package:business_dot_com/view/login_info/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 
@@ -21,12 +17,13 @@ void main() async {
         projectId: 'businessdotcom-62fd1',
         storageBucket: "businessdotcom-62fd1.firebasestorage.app"), //goto ab
   );
+  Get.put(DataController());
   runApp(ScreenUtilInit(
     designSize: const Size(393, 852),
     minTextAdapt: true,
     splitScreenMode: true,
     builder: (context, child) {
-      return MaterialApp(
+      return GetMaterialApp(
         title: "Business.Com",
         localizationsDelegates: const [
           MonthYearPickerLocalizations

@@ -43,19 +43,8 @@ class CompDetailModel {
     required this.mobileNo,
     this.investmentRange,
   });
+ 
 }
 
-List<CompDetailModel> compDetailList = [];
-List<CompDetailModel> domain1 = [];
-List<CompDetailModel> domain2 = [];
-List<CompDetailModel> domain3 = [];
-List<CompDetailModel> domain4 = [];
-
-Set<String> domainSet = {};
-
-List<List<CompDetailModel>> majorCompDetailModelList =
-    List.generate(domainSet.length, (_) => []);
-
-List domainList = domainSet.toList();
 bool partner = false;
 bool investor = false;

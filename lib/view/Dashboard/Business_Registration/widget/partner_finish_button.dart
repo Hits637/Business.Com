@@ -1,15 +1,17 @@
 import 'dart:developer';
 
+import 'package:business_dot_com/Components/text_editing_controller.dart';
+import 'package:business_dot_com/Controller/data_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../Controller/comp_image_dao.dart';
 import '../../../../model/comp_detail_model.dart';
-import '../../../widget/custom_snackbar.dart';
+import '../../../../Components/custom_snackbar.dart';
 import '../../dashboard.dart';
 import 'clear_text.dart';
-import '../../../../Controller/text_editing_controller.dart';
 
 class PartnerFinishButton {
   Widget finishButton(BuildContext context, {required String? email}) {
@@ -22,7 +24,6 @@ class PartnerFinishButton {
             partnerMinQualification.text.trim().isNotEmpty &&
             partnerSkills.text.trim().isNotEmpty &&
             partnerStakes.text.trim().isNotEmpty) {
-              
           Map<String, dynamic> data = {
             "CompLogo": url,
             "OrganizationName": organizationName.text.trim(),
@@ -52,7 +53,6 @@ class PartnerFinishButton {
           log("${domain.text}");
 
           ClearText.clearText();
-
 
           QuerySnapshot response = await FirebaseFirestore.instance
               .collection("CompanyDetails")
@@ -130,14 +130,16 @@ class PartnerFinishButton {
             );
           }
 
-// Log the results
-          log("Final majorCompDetailModelList: $majorCompDetailModelList");
+          // Log the results
+          log("Final majorCompDetailModelList: ${majorCompDetailModelList}");
 
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const MainPage()));
         } else {
           CustomSnackBar.showCustomSnackbar(
-              message: "Please enter valid Data", context: context);
+            title: "Oppsss...",
+            message: "Please enter valid Data",
+          );
         }
       },
       child: Container(

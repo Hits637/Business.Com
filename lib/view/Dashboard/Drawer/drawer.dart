@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:business_dot_com/Controller/session_data.dart';
 import 'package:business_dot_com/view/Dashboard/Drawer/About_Us/about_us.dart';
 import 'package:business_dot_com/view/Dashboard/Drawer/Gov_Schemes/all_scheme_chatagory.dart';
 import 'package:business_dot_com/view/Dashboard/Drawer/Help&Support/help_and_support.dart';
@@ -16,6 +19,13 @@ class DrawerPage extends StatefulWidget {
 }
 
 class _DrawerPageState extends State<DrawerPage> {
+  @override
+  void initState() async {
+    // TODO: implement initState
+    super.initState();
+    await SessionData.getSessionData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -174,6 +184,9 @@ class _DrawerPageState extends State<DrawerPage> {
               ),
               GestureDetector(
                 onTap: () {
+                  SessionData.storeSessionData(
+                      loginData: false, emailId: SessionData.emailId!);
+                  log("${SessionData.emailId}");
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => const LogIn()));
                 },

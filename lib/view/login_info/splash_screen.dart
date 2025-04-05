@@ -1,5 +1,12 @@
+import 'dart:developer';
+
+import 'package:business_dot_com/Controller/session_data.dart';
+import 'package:business_dot_com/view/Dashboard/Functionalities/widget/dashbard_listview.dart';
+import 'package:business_dot_com/view/Dashboard/dashboard.dart';
+import 'package:business_dot_com/view/login_info/log_in.dart';
 import 'package:business_dot_com/view/onboarding_screens/firstpage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -72,14 +79,35 @@ class _SplashScreenState extends State<SplashScreen> {
 void navigate(BuildContext context) {
   Future.delayed(
     const Duration(seconds: 5),
-    () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) {
-            return const Firstpage();
-          },
-        ),
-      );
+    () async {
+      await SessionData.getSessionData();
+      log("Is login: ${SessionData.isLogin}");
+      log("email:${SessionData.emailId}");
+      if (SessionData.isLogin! && SessionData.emailId!.isNotEmpty) {
+        log("Navigate to Home Page");
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) {
+              return MainPage(
+                email: SessionData.emailId,
+              );
+            },
+          ),
+        );
+      } else if (SessionData.emailId!.isNotEmpty &&
+          SessionData.isLogin == false) {
+        log("Navigate to login Page");
+        Get.off(const LogIn());
+      } else {
+        log("Navigate to On boarding Page");
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) {
+              return const Firstpage();
+            },
+          ),
+        );
+      }
     },
   );
 }

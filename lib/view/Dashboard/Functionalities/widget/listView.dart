@@ -1,8 +1,10 @@
+import 'package:business_dot_com/Controller/data_controller.dart';
 import 'package:business_dot_com/model/comp_detail_model.dart';
 import 'package:business_dot_com/view/Dashboard/CompDetails/description.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyWidget extends StatefulWidget {
@@ -62,88 +64,92 @@ class _MyWidgetState extends State<MyWidget> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 30),
-                            child: Container(
-                              height: 190.h,
-                              width: 226.w,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  // ignore: prefer_const_literals_to_create_immutables
-                                  boxShadow: [
-                                    const BoxShadow(
-                                        blurRadius: 4,
-                                        offset: Offset(2, 3),
-                                        color: Colors.grey),
-                                  ],
-                                  color: Colors.white),
-                              child: Padding(
-                                padding: EdgeInsets.only(top: 70.r, left: 20.r),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      //compShortDetailList[index].organizationName,
-                                      majorCompDetailModelList[majorListIndex]
-                                              [index]
-                                          .organizationName!,
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    Text(
-                                      //compShortDetailList[index].pitch,
-                                      majorCompDetailModelList[majorListIndex]
-                                              [index]
-                                          .pitchTextEditingController,
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    Text(
-                                      "Revenue:${majorCompDetailModelList[majorListIndex][index].revenue}",
-                                      //{compShortDetailList[index].revenue}",
-
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    Text(
-                                      "Looking for :${majorCompDetailModelList[majorListIndex][index].investmentRange == "" ? "Partner" : " investor"}",
-                                      //{compShortDetailList[index].revenue}",
-
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        const Icon(
-                                          Icons.location_on_outlined,
-                                          size: 12,
+                            child: Expanded(
+                              child: Container(
+                                height: 190.h,
+                                width: 226.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    // ignore: prefer_const_literals_to_create_immutables
+                                    boxShadow: [
+                                      const BoxShadow(
+                                          blurRadius: 4,
+                                          offset: Offset(2, 3),
+                                          color: Colors.grey),
+                                    ],
+                                    color: Colors.white),
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(top: 70.r, left: 20.r),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        //compShortDetailList[index].organizationName,
+                                        majorCompDetailModelList[majorListIndex]
+                                                [index]
+                                            .organizationName!,
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 18.w,
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.black,
                                         ),
-                                        Text(
-                                          // compShortDetailList[index].city,
-                                          majorCompDetailModelList[
-                                                  majorListIndex][index]
-                                              .city,
-                                          style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 12,
-                                            color: Colors.black,
+                                      ),
+                                      Text(
+                                        //compShortDetailList[index].pitch,
+                                        majorCompDetailModelList[majorListIndex]
+                                                [index]
+                                            .pitchTextEditingController,
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 12.w,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      Text(
+                                        "Revenue:${majorCompDetailModelList[majorListIndex][index].revenue}",
+                                        //{compShortDetailList[index].revenue}",
+
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 12.w,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      Text(
+                                        "Looking for :${majorCompDetailModelList[majorListIndex][index].investmentRange == "" ? "Partner" : " investor"}",
+                                        //{compShortDetailList[index].revenue}",
+
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 12.w,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          const Icon(
+                                            Icons.location_on_outlined,
+                                            size: 12,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                          Text(
+                                            // compShortDetailList[index].city,
+                                            majorCompDetailModelList[
+                                                    majorListIndex][index]
+                                                .city,
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12.w,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

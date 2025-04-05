@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:business_dot_com/view/Dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'cboi.dart';
 import 'digital_communication.dart';
@@ -172,10 +173,10 @@ class _SchemesScreenCategoryState extends State<AllSchemeChatagory> {
             ),
           ),
         ),
-        title: const Text(
+        title: Text(
           "Government Schemes",
           style: TextStyle(
-              color: Colors.white, fontSize: 26, fontWeight: FontWeight.w500),
+              color: Colors.white, fontSize: 26.w, fontWeight: FontWeight.w500),
         ),
       ),
       body: Padding(
@@ -209,8 +210,8 @@ class _SchemesScreenCategoryState extends State<AllSchemeChatagory> {
                     ClipOval(
                       child: Image.asset(
                         scheme['imagePath'],
-                        width: 60,
-                        height: 60,
+                        width: 60.w,
+                        height: 60.h,
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -219,8 +220,8 @@ class _SchemesScreenCategoryState extends State<AllSchemeChatagory> {
                       child: Text(
                         scheme['title'],
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            fontSize: 14,
+                        style: TextStyle(
+                            fontSize: 14.w,
                             color: Colors.black,
                             fontWeight: FontWeight.w500),
                       ),

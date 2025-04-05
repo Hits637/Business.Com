@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
-import '../../../Controller/text_editing_controller.dart';
+import '../../../Components/text_editing_controller.dart';
 
 void bottomSheetpartner(BuildContext context, {required String? email}) {
   //final double screenHeight = MediaQuery.of(context).size.height;

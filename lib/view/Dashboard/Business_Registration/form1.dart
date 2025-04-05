@@ -1,4 +1,6 @@
 //import 'package:business_dot_com/view/Dashboard/Business_Registration/widget/partner_finish_button.dart';
+// ignore_for_file: deprecated_member_use
+
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter_year_picker/flutter_year_picker.dart';
@@ -11,10 +13,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 import '../../../Controller/comp_image_dao.dart';
-import '../../widget/custom_snackbar.dart';
+import '../../../Components/custom_snackbar.dart';
 import 'form2.dart';
 import 'widget/organization_type.dart';
-import '../../../Controller/text_editing_controller.dart';
+import '../../../Components/text_editing_controller.dart';
 
 class RegistrationForm extends StatefulWidget {
   final String? email;
@@ -22,7 +24,7 @@ class RegistrationForm extends StatefulWidget {
   const RegistrationForm({Key? key, this.email}) : super(key: key);
 
   @override
-  State<RegistrationForm> createState() => _RegistrationFormState(email: email);
+  State<RegistrationForm> createState() => _RegistrationFormState();
 }
 
 class _RegistrationFormState extends State<RegistrationForm> {
@@ -793,12 +795,14 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           );
                         } else {
                           CustomSnackBar.showCustomSnackbar(
+                            title: "Oppsss...",
                               message: "Please enter valid Data",
-                              context: context);
+                              );
                         }
                       } else {
                         CustomSnackBar.showCustomSnackbar(
-                            message: _errorText, context: context);
+                          title: "Error",
+                            message: _errorText, );
                       }
                     },
                     child: Container(

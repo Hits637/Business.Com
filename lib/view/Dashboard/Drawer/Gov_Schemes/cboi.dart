@@ -1,5 +1,6 @@
 import 'package:business_dot_com/view/Dashboard/Drawer/Gov_Schemes/all_scheme_chatagory.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -81,8 +82,10 @@ class _CBOIState extends State<CBOI> {
         leading: GestureDetector(
           onTap: () {
             Navigator.of(context).pop();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AllSchemeChatagory()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AllSchemeChatagory()));
           },
           child: const Icon(
             Icons.arrow_back_ios,
@@ -120,7 +123,7 @@ class _CBOIState extends State<CBOI> {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                   color: Colors.blue,
-                  width: 1,
+                  width: 1.w,
                 ),
                 boxShadow: [
                   BoxShadow(
@@ -138,19 +141,19 @@ class _CBOIState extends State<CBOI> {
                   children: [
                     Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.arrow_right_outlined,
                           color: Colors.orange,
-                          size: 35,
+                          size: 35.w,
                         ),
                         Expanded(
                           child: GradientText(
                             scheme['title'],
                             style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.bold),
+                                fontSize: 18.0.w, fontWeight: FontWeight.bold),
                             colors: [
-                              Color.fromARGB(255, 0, 45, 81),
-                              Color.fromARGB(255, 0, 144, 247),
+                              const Color.fromARGB(255, 0, 45, 81),
+                              const Color.fromARGB(255, 0, 144, 247),
                             ],
                           ),
                         ),
@@ -166,68 +169,68 @@ class _CBOIState extends State<CBOI> {
                     ),
                     Text(
                       scheme['ministry'],
-                      style: const TextStyle(
-                        fontSize: 15,
+                      style: TextStyle(
+                        fontSize: 15.w,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
                     const SizedBox(height: 5),
 
                     // Key Sector
-                    const Text(
+                    Text(
                       "Key Sector Covered:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w800, fontSize: 17),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w800, fontSize: 17.w),
                     ),
                     Text(
                       scheme['sector'],
-                      style: const TextStyle(
-                        fontSize: 15,
+                      style: TextStyle(
+                        fontSize: 15.w,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
                     const SizedBox(height: 10),
 
                     // Brief
-                    const Text(
+                    Text(
                       "Brief:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w800, fontSize: 17),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w800, fontSize: 17.w),
                     ),
                     Text(
                       scheme['brief'],
-                      style: const TextStyle(
-                        fontSize: 15,
+                      style: TextStyle(
+                        fontSize: 15.w,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
                     const SizedBox(height: 10),
 
                     // Benefits
-                    const Text(
+                    Text(
                       "Benefits:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w800, fontSize: 17),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w800, fontSize: 17.w),
                     ),
                     Text(
                       scheme['benefits'],
-                      style: const TextStyle(
-                        fontSize: 15,
+                      style: TextStyle(
+                        fontSize: 15.w,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
                     const SizedBox(height: 10),
 
                     // Tenure
-                    const Text(
+                    Text(
                       "Tenure:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w800, fontSize: 17),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w800, fontSize: 17.w),
                     ),
                     Text(
                       scheme['tenure'],
-                      style: const TextStyle(
-                        fontSize: 15,
+                      style: TextStyle(
+                        fontSize: 15.w,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -236,28 +239,28 @@ class _CBOIState extends State<CBOI> {
                     // Conditionally show expanded content
                     if (scheme["isExpanded"] ?? false) ...[
                       const SizedBox(height: 10),
-                      const Text(
+                      Text(
                         "Eligibility Criteria:",
                         style: TextStyle(
-                            fontWeight: FontWeight.w800, fontSize: 17),
+                            fontWeight: FontWeight.w800, fontSize: 17.w),
                       ),
-                      const Text(
+                      Text(
                         "Please refer to official guidelines.",
-                        style: const TextStyle(
-                          fontSize: 15,
+                        style: TextStyle(
+                          fontSize: 15.w,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
                       const SizedBox(height: 10),
-                      const Text(
+                      Text(
                         "Notes:",
                         style: TextStyle(
-                            fontWeight: FontWeight.w800, fontSize: 17),
+                            fontWeight: FontWeight.w800, fontSize: 17.w),
                       ),
-                      const Text(
+                      Text(
                         "Additional information about the scheme can be found here.",
-                        style: const TextStyle(
-                          fontSize: 15,
+                        style: TextStyle(
+                          fontSize: 15.w,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -277,8 +280,8 @@ class _CBOIState extends State<CBOI> {
                               ? "Read less..."
                               : "Read more...",
                           textAlign: TextAlign.end,
-                          style: const TextStyle(
-                              fontSize: 12,
+                          style: TextStyle(
+                              fontSize: 12.w,
                               fontWeight: FontWeight.w400,
                               color: Colors.blue),
                         ),
@@ -286,10 +289,10 @@ class _CBOIState extends State<CBOI> {
                     ),
                     const SizedBox(height: 20),
 
-                    const Text(
+                    Text(
                       "Link to Application:",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 16.w,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -303,7 +306,7 @@ class _CBOIState extends State<CBOI> {
                         decoration: BoxDecoration(
                           //color: Colors.blue,
                           borderRadius: BorderRadius.circular(8),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             // colors for gradient
                             colors: [
                               Color.fromARGB(255, 0, 45, 81),
@@ -311,11 +314,11 @@ class _CBOIState extends State<CBOI> {
                             ],
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           "Visit Application Link",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.w,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),

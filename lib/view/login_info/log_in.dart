@@ -1,4 +1,5 @@
 import "dart:developer";
+import "package:business_dot_com/Controller/session_data.dart";
 import "package:business_dot_com/model/b2b_model.dart";
 import "package:business_dot_com/view/Dashboard/dashboard.dart";
 import "package:business_dot_com/view/login_info/sign_up.dart";
@@ -8,7 +9,7 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:google_fonts/google_fonts.dart";
 import "../../model/comp_detail_model.dart";
-import "../widget/custom_snackbar.dart";
+import "../../Components/custom_snackbar.dart";
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -104,13 +105,14 @@ class _LogInState extends State<LogIn> {
                             prefixIcon: Icon(
                               Icons.email_outlined,
                               size: 22.r,
-                              color: Color.fromRGBO(36, 89, 171, 1),
+                              color: const Color.fromRGBO(36, 89, 171, 1),
                             ),
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 10.h, horizontal: 12.w),
                             border: InputBorder.none, // No border at all
                           ),
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.black),
                         ),
                       ),
                       SizedBox(
@@ -147,7 +149,7 @@ class _LogInState extends State<LogIn> {
                               Icons
                                   .lock_outline, // Updated icon for better clarity
                               size: 22.r,
-                              color: Color.fromRGBO(36, 89, 171, 1),
+                              color: const Color.fromRGBO(36, 89, 171, 1),
                             ),
                             suffixIcon: IconButton(
                               icon: Icon(
@@ -168,7 +170,8 @@ class _LogInState extends State<LogIn> {
                             border: InputBorder
                                 .none, // Match email field (No border)
                           ),
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.black),
                         ),
                       ),
 
@@ -187,7 +190,7 @@ class _LogInState extends State<LogIn> {
                             style: GoogleFonts.roboto(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
-                                color: Color.fromRGBO(36, 89, 171, 1)),
+                                color: const Color.fromRGBO(36, 89, 171, 1)),
                           ),
                         ),
                       ),
@@ -217,125 +220,15 @@ class _LogInState extends State<LogIn> {
                                 log(userCredential.user!.email!);
                                 emailTextEditingController.clear();
                                 _passwordTextEditingController.clear();
+
                                 String? email = userCredential.user?.email;
 
-                                QuerySnapshot response = await FirebaseFirestore
-                                    .instance
-                                    .collection("CompanyDetails")
-                                    .get();
-
-                                log("Total documents: ${response.docs.length}");
-
-                                Map<String, int> domainIndexMap = {};
-                                for (int i = 0; i < domainList.length; i++) {
-                                  domainIndexMap[domainList[i]] = i;
-                                }
-
-                                for (int i = 0; i < response.docs.length; i++) {
-                                  // Extract and validate the domain
-                                  String? domain = response.docs[i]["Domain"];
-                                  if (domain == null || domain.isEmpty) {
-                                    log("Document missing Domain field. Skipping...");
-                                    continue;
-                                  }
-
-                                  // Check if the domain is already in the set
-                                  int? domainIndex = domainIndexMap[domain];
-                                  if (domainIndex == null) {
-                                    // New domain found
-                                    domainSet.add(domain);
-                                    domainList.add(domain);
-                                    domainIndex = domainList.length -
-                                        1; // Index of the new domain
-                                    majorCompDetailModelList.add(
-                                        []); // Add new list for this domain
-                                    domainIndexMap[domain] = domainIndex;
-                                  }
-
-                                  // Add the document to the correct list
-                                  majorCompDetailModelList[domainIndex].add(
-                                    CompDetailModel(
-                                        organizationName: response.docs[i]
-                                                ['OrganizationName'] ??
-                                            'N/A',
-                                        city: response.docs[i]['city'] ?? 'N/A',
-                                        pitchTextEditingController:
-                                            response.docs[i]['pitch'] ?? 'N/A',
-                                        revenue: response.docs[i]['Revenue'] ??
-                                            'N/A',
-                                        compLogo: response.docs[i]['CompLogo'] ??
-                                            'N/A',
-                                        ownerName: response.docs[i]['OwnerName'] ??
-                                            'N/A',
-                                        domain:
-                                            response.docs[i]['Domain'] ?? 'N/A',
-                                        organizationType: response.docs[i]
-                                                ['Organization Type'] ??
-                                            'N/A',
-                                        establishmentYear: response.docs[i]
-                                                ['Establishment Year'] ??
-                                            'N/A',
-                                        gstinNo: response.docs[i]['GSTIN No'] ??
-                                            'N/A',
-                                        address:
-                                            response.docs[i]['Address'] ?? 'N/A',
-                                        state: response.docs[i]['state'] ?? 'N/A',
-                                        descriptionTextEditingController: response.docs[i]['Description'] ?? 'N/A',
-                                        partnerSkills: response.docs[i]['Skills'] ?? 'N/A',
-                                        websiteTextEditingController: response.docs[i]['Website'] ?? 'N/A',
-                                        partnerMinQualification: response.docs[i]['Min Qualification'] ?? 'N/A',
-                                        partnerRequirment: response.docs[i]['Requirement'] ?? 'N/A',
-                                        partnerStakes: response.docs[i]['stake'],
-                                        investmentRange: response.docs[i]['investmentRange'] ?? "N/a",
-                                        mobileNo: response.docs[i]['mobileNo'] ?? 'N/A'),
-                                  );
-                                }
-                                QuerySnapshot b2bResponse =
-                                    await FirebaseFirestore.instance
-                                        .collection("B2B Details")
-                                        .get();
-
-                                for (int i = 0;
-                                    i < b2bResponse.docs.length;
-                                    i++) {
-                                  b2bDetailList.add(
-                                    B2bModel(
-                                        organizationName: b2bResponse.docs[i]
-                                                ['organizationName'] ??
-                                            'N/A',
-                                        ownerName: b2bResponse.docs[i]
-                                                ['ownerName'] ??
-                                            'N/A',
-                                        domain:
-                                            b2bResponse.docs[i]['domain'] == ""
-                                                ? "N/A"
-                                                : b2bResponse.docs[i]['domain'],
-                                        organizationType: b2bResponse.docs[i]
-                                                ['organizationType'] ??
-                                            'N/A',
-                                        businessColab: b2bResponse.docs[i]
-                                                ['businessColab'] ??
-                                            'N/A',
-                                        gstinNo: b2bResponse.docs[i]['gstinNo'] ??
-                                            'N/A',
-                                        moneyOffered: b2bResponse.docs[i]
-                                                ['moneyOffered'] ??
-                                            'N/A',
-                                        employeerequire: b2bResponse.docs[i]
-                                                ['employeerequire'] ??
-                                            'N/A',
-                                        address: b2bResponse.docs[i]['address'] ?? 'N/A',
-                                        colabwithBusiness: b2bResponse.docs[i]['colabwithBusiness'] ?? 'N/A',
-                                        colabarationType: b2bResponse.docs[i]['colabarationType'] ?? 'N/A',
-                                        city: b2bResponse.docs[i]['city'] ?? 'N/A',
-                                        state: b2bResponse.docs[i]['state'] ?? 'N/A',
-                                        compLogo: b2bResponse.docs[i]['compLogo'] ?? 'N/A'),
-                                  );
-                                }
-
-                                log("Final majorCompDetailModelList: $majorCompDetailModelList");
-
-                                setState(() {});
+                                //setState(() {});
+                                await SessionData.storeSessionData(
+                                  loginData: true,
+                                  emailId: userCredential.user!.email!,
+                                );
+                                log("Session Data : ${SessionData.emailId}, ${SessionData.isLogin}");
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
@@ -347,11 +240,15 @@ class _LogInState extends State<LogIn> {
                                 log("B2B: error code: ${error.code}");
                                 log("B2B: error message: ${error.message}");
                                 CustomSnackBar.showCustomSnackbar(
-                                  message: error.code,
+                                  title: error.code,
+                                  message: "Please Enter the valid Data",
                                   // ignore: use_build_context_synchronously
-                                  context: context,
                                 );
                               }
+                            } else {
+                              CustomSnackBar.showCustomSnackbar(
+                                  title: "Empty Fields...",
+                                  message: "Please Enter The Data");
                             }
                           },
                           child: Container(
@@ -374,7 +271,7 @@ class _LogInState extends State<LogIn> {
                               style: GoogleFonts.roboto(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w700,
-                                color: Color.fromRGBO(255, 255, 255, 1),
+                                color: const Color.fromRGBO(255, 255, 255, 1),
                               ),
                             ),
                           ),
@@ -405,7 +302,7 @@ class _LogInState extends State<LogIn> {
                               style: GoogleFonts.roboto(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w900,
-                                  color: Color.fromRGBO(36, 89, 171, 1)),
+                                  color: const Color.fromRGBO(36, 89, 171, 1)),
                             ),
                           ),
                         ],
@@ -424,10 +321,10 @@ class _LogInState extends State<LogIn> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     blurRadius: 4,
-                                    offset: const Offset(0, 2),
+                                    offset: Offset(0, 2),
                                     color: Colors.grey,
                                   )
                                 ]),
@@ -444,10 +341,10 @@ class _LogInState extends State<LogIn> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     blurRadius: 4,
-                                    offset: const Offset(0, 2),
+                                    offset: Offset(0, 2),
                                     color: Colors.grey,
                                   )
                                 ]),
@@ -464,10 +361,10 @@ class _LogInState extends State<LogIn> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     blurRadius: 4,
-                                    offset: const Offset(0, 2),
+                                    offset: Offset(0, 2),
                                     color: Colors.grey,
                                   )
                                 ]),
@@ -484,10 +381,10 @@ class _LogInState extends State<LogIn> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     blurRadius: 4,
-                                    offset: const Offset(0, 2),
+                                    offset: Offset(0, 2),
                                     color: Colors.grey,
                                   )
                                 ]),

@@ -1,5 +1,7 @@
+import "package:business_dot_com/Controller/data_controller.dart";
 import "package:business_dot_com/view/Dashboard/CompDetails/widget/connect_code.dart";
 import "package:flutter/material.dart";
+import "package:get/get.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:simple_gradient_text/simple_gradient_text.dart";
 

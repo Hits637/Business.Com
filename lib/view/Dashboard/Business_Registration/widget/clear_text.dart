@@ -1,7 +1,7 @@
 
 import 'package:business_dot_com/view/Dashboard/Business_Registration/form1.dart';
 
-import '../../../../Controller/text_editing_controller.dart';
+import '../../../../Components/text_editing_controller.dart';
 
 class ClearText {
   static void clearText() {

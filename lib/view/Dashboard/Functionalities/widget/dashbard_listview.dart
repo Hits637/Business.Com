@@ -1,10 +1,12 @@
 import 'dart:developer';
 
+import 'package:business_dot_com/Controller/data_controller.dart';
 import 'package:business_dot_com/view/Dashboard/Business_Registration/form1.dart';
 import 'package:business_dot_com/view/Dashboard/Drawer/drawer.dart';
 import 'package:business_dot_com/view/Dashboard/Functionalities/widget/listView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
@@ -126,6 +128,7 @@ class _HomePageControllerState extends State<HomePageController> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        iconTheme:const IconThemeData(color: Colors.white),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         title: Row(
@@ -153,7 +156,7 @@ class _HomePageControllerState extends State<HomePageController> {
         ),
       ),
       backgroundColor: Colors.transparent,
-      drawer: const DrawerPage(),
+      drawer:  DrawerPage(),
       body: Stack(children: [
         Image.asset(
           "assets/images/main_dashboard_vector.png",
@@ -162,41 +165,43 @@ class _HomePageControllerState extends State<HomePageController> {
           fit: BoxFit.cover,
         ),
         SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 40.w, top: 90.h),
-                child: Image.asset("assets/images/dashboard_3Dimg.png"),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: List.generate(
-                  domainList.length,
-                  (index) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15, left: 15),
-                        child: Text(
-                          domainList[index],
-                          style: GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
+          child: 
+             Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 40.w, top: 90.h),
+                  child: Image.asset("assets/images/dashboard_3Dimg.png"),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(
+                    domainList.length,
+                    (index) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15, left: 15),
+                          child: Text(
+                            domainList[index],
+                            style: GoogleFonts.poppins(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 10.h),
-                      MyWidget(
-                        email: email,
-                        majorListIndex: index,
-                      ),
-                    ],
+                        SizedBox(height: 10.h),
+                        MyWidget(
+                          email: email,
+                          majorListIndex: index,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          
         ),
       ]),
       floatingActionButton: FloatingActionButton(
