@@ -24,6 +24,12 @@ class _MyWidgetState extends State<MyWidget> {
     highlightedIndex = -1;
     super.dispose(); // Always call super.dispose() at the end.
   }
+   Future<void> _refresh() async{
+    await DataController.fetchCompData();
+    setState(() {
+      
+    });
+  }
 
   String? email;
   final int majorListIndex;
@@ -31,40 +37,41 @@ class _MyWidgetState extends State<MyWidget> {
   int? highlightedIndex;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      height: 220.h,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: majorCompDetailModelList[majorListIndex].length,
-        itemBuilder: (context, int index) {
-          return GestureDetector(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.w),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 215.h, // Dynamic card height
-                    width: 230.w,
-
-                    child: GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Description(
-                              majorListIndex: widget.majorListIndex,
-                              index: index,
+    return RefreshIndicator(
+      onRefresh: _refresh,
+      child: Container(
+        color: Colors.transparent,
+        height: 220.h,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: majorCompDetailModelList[majorListIndex].length,
+          itemBuilder: (context, int index) {
+            return GestureDetector(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 215.h, // Dynamic card height
+                      width: 230.w,
+      
+                      child: GestureDetector(
+                        onTap: () async {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Description(
+                                majorListIndex: widget.majorListIndex,
+                                index: index,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      child: Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 30),
-                            child: Expanded(
+                          );
+                        },
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30),
                               child: Container(
                                 height: 190.h,
                                 width: 226.w,
@@ -110,7 +117,7 @@ class _MyWidgetState extends State<MyWidget> {
                                       Text(
                                         "Revenue:${majorCompDetailModelList[majorListIndex][index].revenue}",
                                         //{compShortDetailList[index].revenue}",
-
+                              
                                         style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12.w,
@@ -120,7 +127,7 @@ class _MyWidgetState extends State<MyWidget> {
                                       Text(
                                         "Looking for :${majorCompDetailModelList[majorListIndex][index].investmentRange == "" ? "Partner" : " investor"}",
                                         //{compShortDetailList[index].revenue}",
-
+                              
                                         style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12.w,
@@ -153,28 +160,28 @@ class _MyWidgetState extends State<MyWidget> {
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 70.w),
-                            child: ClipOval(
-                              child: Image.network(
-                                  majorCompDetailModelList[majorListIndex]
-                                          [index]
-                                      .compLogo,
-                                  height: 90.h,
-                                  width: 90.h,
-                                  fit: BoxFit.cover),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 70.w),
+                              child: ClipOval(
+                                child: Image.network(
+                                    majorCompDetailModelList[majorListIndex]
+                                            [index]
+                                        .compLogo,
+                                    height: 90.h,
+                                    width: 90.h,
+                                    fit: BoxFit.cover),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

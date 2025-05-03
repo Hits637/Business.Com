@@ -3,11 +3,9 @@
 
 import 'dart:developer';
 import 'dart:io';
-import 'package:flutter_year_picker/flutter_year_picker.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 
 import 'package:business_dot_com/view/Dashboard/Business_Registration/widget/domain_list.dart';
-import 'package:business_dot_com/view/Dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -73,15 +71,14 @@ class _RegistrationFormState extends State<RegistrationForm> {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: GestureDetector(
           onTap: () {
             Navigator.of(context).pop();
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MainPage()));
+           // Navigator.push(
+             //   context, MaterialPageRoute(builder: (context) => MainPage()));
           },
           child: const Icon(
             Icons.arrow_back_ios,

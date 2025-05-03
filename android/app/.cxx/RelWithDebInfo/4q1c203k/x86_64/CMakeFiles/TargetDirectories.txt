@@ -1,0 +1,2 @@
+D:/Business.Com/Business.Com-master/Business.Com-master/android/app/.cxx/RelWithDebInfo/4q1c203k/x86_64/CMakeFiles/edit_cache.dir
+D:/Business.Com/Business.Com-master/Business.Com-master/android/app/.cxx/RelWithDebInfo/4q1c203k/x86_64/CMakeFiles/rebuild_cache.dir

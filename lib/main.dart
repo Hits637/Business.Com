@@ -15,9 +15,9 @@ void main() async {
         appId: '1:37414851158:android:f5047bf8c92fc1f6ed21f7',
         messagingSenderId: '37414851158',
         projectId: 'businessdotcom-62fd1',
-        storageBucket: "businessdotcom-62fd1.firebasestorage.app"), //goto ab
+        storageBucket: "businessdotcom-62fd1.firebasestorage.app"),
   );
-  Get.put(DataController());
+  Get.put( DataController());
   runApp(ScreenUtilInit(
     designSize: const Size(393, 852),
     minTextAdapt: true,
@@ -33,10 +33,11 @@ void main() async {
           Locale('en', ''), // Add locales as needed
         ],
         theme: ThemeData(
-            textTheme:
-                GoogleFonts.merriweatherTextTheme(Theme.of(context).textTheme)),
+          textTheme:
+              GoogleFonts.merriweatherTextTheme(Theme.of(context).textTheme),
+        ),
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: const SplashScreen(),
       );
     },
   ));

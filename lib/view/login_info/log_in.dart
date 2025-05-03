@@ -1,4 +1,5 @@
 import "dart:developer";
+import "package:business_dot_com/Controller/data_controller.dart";
 import "package:business_dot_com/Controller/session_data.dart";
 import "package:business_dot_com/model/b2b_model.dart";
 import "package:business_dot_com/view/Dashboard/dashboard.dart";
@@ -97,10 +98,10 @@ class _LogInState extends State<LogIn> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            labelText: 'Email',
-                            labelStyle: GoogleFonts.roboto(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
+                            hintText: 'Email',
+                            hintStyle: GoogleFonts.roboto(
+                                fontSize: MediaQuery.of(context).size.width*0.042,
+                                fontWeight: FontWeight.w600,
                                 color: const Color.fromRGBO(119, 119, 119, 1)),
                             prefixIcon: Icon(
                               Icons.email_outlined,
@@ -141,9 +142,9 @@ class _LogInState extends State<LogIn> {
                             filled: true,
                             fillColor: Colors.white,
                             hintText: 'Password',
-                            labelStyle: GoogleFonts.roboto(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
+                            hintStyle: GoogleFonts.roboto(
+                                fontSize: MediaQuery.of(context).size.width*0.042,
+                                fontWeight: FontWeight.w600,
                                 color: const Color.fromRGBO(119, 119, 119, 1)),
                             prefixIcon: Icon(
                               Icons
@@ -224,11 +225,14 @@ class _LogInState extends State<LogIn> {
                                 String? email = userCredential.user?.email;
 
                                 //setState(() {});
-                                await SessionData.storeSessionData(
+                                await SessionData.storeSessionData (
                                   loginData: true,
-                                  emailId: userCredential.user!.email!,
+                                  emailId:emailTextEditingController.text,
+                                  role:  "",
                                 );
                                 log("Session Data : ${SessionData.emailId}, ${SessionData.isLogin}");
+                                log ("Role: ${SessionData.role}");
+                              
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(

@@ -120,6 +120,12 @@ class _HomePageControllerState extends State<HomePageController> {
           .toList();
     }
   }
+   Future<void> _refresh() async{
+    await DataController.fetchCompData();
+    setState(() {
+      
+    });
+  }
 
   _HomePageControllerState({required this.email});
 
@@ -133,7 +139,7 @@ class _HomePageControllerState extends State<HomePageController> {
         backgroundColor: Colors.transparent,
         title: Row(
           children: [
-            Spacer(),
+            const Spacer(),
             const Text(
               "Business.com",
               style: TextStyle(
@@ -143,10 +149,10 @@ class _HomePageControllerState extends State<HomePageController> {
               ),
               textAlign: TextAlign.center,
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: EdgeInsets.only(right: 1.r),
-              child: Icon(
+              child: const Icon(
                 Icons.search,
                 size: 26,
                 color: Colors.white,
@@ -156,54 +162,60 @@ class _HomePageControllerState extends State<HomePageController> {
         ),
       ),
       backgroundColor: Colors.transparent,
-      drawer:  DrawerPage(),
-      body: Stack(children: [
-        Image.asset(
-          "assets/images/main_dashboard_vector.png",
-          height: 393.w,
-          width: 393.w,
-          fit: BoxFit.cover,
-        ),
-        SingleChildScrollView(
-          child: 
-             Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 40.w, top: 90.h),
-                  child: Image.asset("assets/images/dashboard_3Dimg.png"),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(
-                    domainList.length,
-                    (index) => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15, left: 15),
-                          child: Text(
-                            domainList[index],
-                            style: GoogleFonts.poppins(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black,
+      drawer:  const DrawerPage(),
+      body: RefreshIndicator(
+        onRefresh: _refresh,
+        //backgroundColor: Colors.blue,
+        //color: Colors.white,
+      
+        child: Stack(children: [
+          Image.asset(
+            "assets/images/main_dashboard_vector.png",
+            height: 393.w,
+            width: 393.w,
+            fit: BoxFit.cover,
+          ),
+          SingleChildScrollView(
+            child: 
+               Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 40.w, top: 90.h),
+                    child: Image.asset("assets/images/dashboard_3Dimg.png"),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: List.generate(
+                      domainList.length,
+                      (index) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15, left: 15),
+                            child: Text(
+                              domainList[index],
+                              style: GoogleFonts.poppins(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 10.h),
-                        MyWidget(
-                          email: email,
-                          majorListIndex: index,
-                        ),
-                      ],
+                          SizedBox(height: 10.h),
+                          MyWidget(
+                            email: email,
+                            majorListIndex: index,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          
-        ),
-      ]),
+                ],
+              ),
+            
+          ),
+        ]),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           log("$email");

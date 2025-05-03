@@ -1,10 +1,10 @@
-
 import 'package:business_dot_com/view/Dashboard/Business_Registration/form1.dart';
 
 import '../../../../Components/text_editing_controller.dart';
 
 class ClearText {
   static void clearText() {
+    mobileNo.clear();
     organizationName.clear();
     ownerName.clear();
     domain.clear();
@@ -27,7 +27,5 @@ class ClearText {
     partnerMinQualification.clear();
     partnerSkills.clear();
     partnerStakes.clear();
-  
-
   }
 }

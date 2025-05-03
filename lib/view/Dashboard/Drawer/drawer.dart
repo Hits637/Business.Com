@@ -20,9 +20,13 @@ class DrawerPage extends StatefulWidget {
 
 class _DrawerPageState extends State<DrawerPage> {
   @override
-  void initState() async {
+  void initState() {
     // TODO: implement initState
     super.initState();
+    _loadData();
+  }
+
+  void _loadData() async {
     await SessionData.getSessionData();
   }
 
@@ -185,7 +189,7 @@ class _DrawerPageState extends State<DrawerPage> {
               GestureDetector(
                 onTap: () {
                   SessionData.storeSessionData(
-                      loginData: false, emailId: SessionData.emailId!);
+                      loginData: false, emailId: SessionData.emailId!, role: "");
                   log("${SessionData.emailId}");
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => const LogIn()));

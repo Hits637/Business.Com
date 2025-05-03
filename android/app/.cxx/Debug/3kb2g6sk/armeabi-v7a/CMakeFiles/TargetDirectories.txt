@@ -1,0 +1,2 @@
+D:/Business.Com/Business.Com-master/Business.Com-master/android/app/.cxx/Debug/3kb2g6sk/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/Business.Com/Business.Com-master/Business.Com-master/android/app/.cxx/Debug/3kb2g6sk/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -153,8 +153,8 @@ class _SchemesScreenCategoryState extends State<AllSchemeChatagory> {
         leading: GestureDetector(
           onTap: () {
             Navigator.of(context).pop();
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MainPage()));
+            // Navigator.push(
+            //     context, MaterialPageRoute(builder: (context) => MainPage()));
           },
           child: const Icon(
             Icons.arrow_back_ios,

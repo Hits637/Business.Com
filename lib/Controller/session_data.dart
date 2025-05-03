@@ -5,10 +5,12 @@ class SessionData {
   static bool? isLogin;
   static String? emailId;
   static bool? firstTime;
+  static String? role;
 
   static Future<void> storeSessionData(
       {required bool loginData,
       required String emailId,
+      required String role
    }) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
@@ -16,6 +18,11 @@ class SessionData {
 
     sharedPreferences.setBool("loginSession", loginData);
     sharedPreferences.setString("email", emailId);
+    sharedPreferences.setString("role", role);
+
+    SessionData.isLogin = loginData;
+    SessionData.emailId = emailId;
+    SessionData.role = role;
 
   }
 
@@ -24,6 +31,7 @@ class SessionData {
 
     isLogin = sharedPreferences.getBool("loginSession") ?? false;
     emailId = sharedPreferences.getString("email") ?? "";
+    role = sharedPreferences.getString("role")?? "";
 
   }
 }
