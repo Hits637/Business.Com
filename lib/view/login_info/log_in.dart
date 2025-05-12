@@ -100,7 +100,8 @@ class _LogInState extends State<LogIn> {
                             fillColor: Colors.white,
                             hintText: 'Email',
                             hintStyle: GoogleFonts.roboto(
-                                fontSize: MediaQuery.of(context).size.width*0.042,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.042,
                                 fontWeight: FontWeight.w600,
                                 color: const Color.fromRGBO(119, 119, 119, 1)),
                             prefixIcon: Icon(
@@ -143,7 +144,8 @@ class _LogInState extends State<LogIn> {
                             fillColor: Colors.white,
                             hintText: 'Password',
                             hintStyle: GoogleFonts.roboto(
-                                fontSize: MediaQuery.of(context).size.width*0.042,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.042,
                                 fontWeight: FontWeight.w600,
                                 color: const Color.fromRGBO(119, 119, 119, 1)),
                             prefixIcon: Icon(
@@ -225,14 +227,14 @@ class _LogInState extends State<LogIn> {
                                 String? email = userCredential.user?.email;
 
                                 //setState(() {});
-                                await SessionData.storeSessionData (
+                                await SessionData.storeSessionData(
                                   loginData: true,
-                                  emailId:emailTextEditingController.text,
-                                  role:  "",
+                                  emailId: email!,
+                                  role: "",
                                 );
-                                log("Session Data : ${SessionData.emailId}, ${SessionData.isLogin}");
-                                log ("Role: ${SessionData.role}");
-                              
+                                log("Session Data : email:${SessionData.emailId},is Login ${SessionData.isLogin}");
+                                log("Role: ${SessionData.role}");
+
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(

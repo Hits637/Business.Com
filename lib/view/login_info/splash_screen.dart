@@ -17,19 +17,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    navigate(context);
-  }
 
   @override
   Widget build(BuildContext context) {
+    navigate(context);
     
     return Scaffold(
+      
       body: Stack(
+        
         children: [
           // Background Image
           SizedBox(

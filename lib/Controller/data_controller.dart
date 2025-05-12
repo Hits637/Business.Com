@@ -17,7 +17,7 @@ List domainList = domainSet.toList();
 List<CompDetailModel> userCompList = [];
 
 class DataController extends GetxController {
-  String userId = FirebaseAuth.instance.currentUser!.uid;
+ // String userId = FirebaseAuth.instance.currentUser!.uid;
   @override
   void onInit() async {
     super.onInit();

@@ -22,7 +22,7 @@ class _MainProfilePageState extends State<MainProfilePage> {
   String userId = FirebaseAuth.instance.currentUser!.uid;
   Future<void> _onRefresh() async {
     await DataController.fetchUserData(userId);
-    // await DataController.fetchCompData();
+    //await DataController.fetchCompData();
     setState(() {});
   }
 
@@ -53,8 +53,8 @@ class _MainProfilePageState extends State<MainProfilePage> {
     // TODO: implement initState
     super.initState();
 
-    loadFetchUserData();
-    loadSessionData();
+    //loadFetchUserData();
+    //loadSessionData();
   }
 
   Future<void> loadSessionData() async {
