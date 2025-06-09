@@ -102,7 +102,7 @@ class _HomePageControllerState extends State<HomePageController> {
   void initState() {
     super.initState();
     filteredItems = List.from(items);
-    String userName = email!.split('@')[0].replaceAll(RegExp(r'[0-9]'), '');
+     userName = email!.split('@')[0].replaceAll(RegExp(r'[0-9]'), '');
   }
 
   void _onSearchChanged(String value) {

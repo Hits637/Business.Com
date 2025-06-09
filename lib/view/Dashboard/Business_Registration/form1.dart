@@ -3,6 +3,9 @@
 
 import 'dart:developer';
 import 'dart:io';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
 import 'package:month_year_picker/month_year_picker.dart';
 
 import 'package:business_dot_com/view/Dashboard/Business_Registration/widget/domain_list.dart';
@@ -77,8 +80,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
         leading: GestureDetector(
           onTap: () {
             Navigator.of(context).pop();
-           // Navigator.push(
-             //   context, MaterialPageRoute(builder: (context) => MainPage()));
+            // Navigator.push(
+            //   context, MaterialPageRoute(builder: (context) => MainPage()));
           },
           child: const Icon(
             Icons.arrow_back_ios,
@@ -159,7 +162,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
               Container(
                 height: 55,
                 decoration: BoxDecoration(
-                  
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
@@ -213,7 +215,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
               Container(
                 height: 55,
                 decoration: BoxDecoration(
-                  color: Colors.white, // Background color
+                  // color: Colors.white, // Background color
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
@@ -268,7 +270,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
               Container(
                 height: 55,
                 decoration: BoxDecoration(
-                  color: Colors.white, // Background color
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
@@ -448,7 +449,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
               Container(
                 height: 55,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  //  color: Colors.white,
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
@@ -462,17 +463,26 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 ),
                 child: TextField(
                   controller: establishmentYear,
-                  decoration: InputDecoration(
-                    //fillColor: const Color.fromRGBO(170, 196, 243, 1),
-                    //fillColor: const Color.fromARGB(255, 219, 229, 246),
-                    fillColor: const Color.fromRGBO(255, 255, 255, 1),
-                    filled: true,
-                    //hintText: "YYYY",
-                    hintText: 'YYYY',
-                    hintStyle: const TextStyle(
-                        //color: Color.fromARGB(255, 190, 189, 189),
+                  readOnly: true,
+                  onTap: () async {
+                    final selected = await showMonthYearPicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1950),
+                      lastDate: DateTime(DateTime.now().year + 1),
+                    );
 
-                        ),
+                    if (selected != null) {
+                      setState(() {
+                        establishmentYear.text =
+                            "${selected.month.toString().padLeft(2, '0')}/${selected.year}";
+                      });
+                    }
+                  },
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: 'MM/YYYY',
                     suffixIcon: const Icon(Icons.calendar_month),
                     enabledBorder: OutlineInputBorder(
                       borderSide:
@@ -480,15 +490,66 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  onTap: () async {
-                    _pickYear(context);
-                  },
-                  style: const TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                  ),
+                  style: const TextStyle(fontSize: 15, color: Colors.black),
                 ),
               ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: GradientText(
+              //     "Establishment Year: ",
+              //     style: const TextStyle(
+              //         fontSize: 17.0, fontWeight: FontWeight.bold),
+              //     colors: const [
+              //       Color.fromARGB(255, 0, 45, 81),
+              //       Color.fromARGB(255, 0, 144, 247),
+              //     ],
+              //   ),
+              // ),
+
+              // Container(
+              //   height: 55,
+              //   decoration: BoxDecoration(
+              //     color: Colors.white,
+              //     borderRadius: BorderRadius.circular(30),
+              //     boxShadow: [
+              //       BoxShadow(
+              //         color: const Color.fromARGB(255, 218, 229, 242)
+              //             .withOpacity(1),
+              //         spreadRadius: 1,
+              //         blurRadius: 5,
+              //         offset: const Offset(5, 8),
+              //       )
+              //     ],
+              //   ),
+              //   child: TextField(
+              //     controller: establishmentYear,
+              //     decoration: InputDecoration(
+              //       //fillColor: const Color.fromRGBO(170, 196, 243, 1),
+              //       //fillColor: const Color.fromARGB(255, 219, 229, 246),
+              //       fillColor: const Color.fromRGBO(255, 255, 255, 1),
+              //       filled: true,
+              //       //hintText: "YYYY",
+              //       hintText: 'YYYY',
+              //       hintStyle: const TextStyle(
+              //           //color: Color.fromARGB(255, 190, 189, 189),
+
+              //           ),
+              //       suffixIcon: const Icon(Icons.calendar_month),
+              //       enabledBorder: OutlineInputBorder(
+              //         borderSide:
+              //             const BorderSide(color: Colors.blue, width: 1.5),
+              //         borderRadius: BorderRadius.circular(30),
+              //       ),
+              //     ),
+              //     onTap: () async {
+              //       _pickYear(context);
+              //     },
+              //     style: const TextStyle(
+              //       fontSize: 15,
+              //       color: Colors.black,
+              //     ),
+              //   ),
+              // ),
               SizedBox(height: screenHeight * 0.02),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -505,7 +566,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
               Container(
                 height: 55,
                 decoration: BoxDecoration(
-                  color: Colors.white, // Background color
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
@@ -558,7 +618,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
               Container(
                 height: 55,
                 decoration: BoxDecoration(
-                    color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
@@ -612,7 +671,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
               Container(
                 height: 55,
                 decoration: BoxDecoration(
-                    color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
@@ -665,7 +723,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
               Container(
                 height: 55,
                 decoration: BoxDecoration(
-                    color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
@@ -716,7 +773,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
               Container(
                 height: 55,
                 decoration: BoxDecoration(
-                  color: Colors.white,
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
@@ -793,13 +849,14 @@ class _RegistrationFormState extends State<RegistrationForm> {
                         } else {
                           CustomSnackBar.showCustomSnackbar(
                             title: "Oppsss...",
-                              message: "Please enter valid Data",
-                              );
+                            message: "Please enter valid Data",
+                          );
                         }
                       } else {
                         CustomSnackBar.showCustomSnackbar(
                           title: "Error",
-                            message: _errorText, );
+                          message: _errorText,
+                        );
                       }
                     },
                     child: Container(

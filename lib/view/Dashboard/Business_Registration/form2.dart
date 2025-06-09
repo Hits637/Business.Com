@@ -84,7 +84,6 @@ class _Form2State extends State<Form2> {
                     Container(
                       height: 55,
                       decoration: BoxDecoration(
-                        color: Colors.white, // Background color
                         borderRadius: BorderRadius.circular(30),
                         boxShadow: [
                           BoxShadow(
@@ -135,7 +134,6 @@ class _Form2State extends State<Form2> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.white, // Background color
                         borderRadius: BorderRadius.circular(40),
                         boxShadow: [
                           BoxShadow(
@@ -201,7 +199,6 @@ class _Form2State extends State<Form2> {
                             height: 100,
                             clipBehavior: Clip.antiAlias,
                             decoration: BoxDecoration(
-                              color: Colors.white,
                               shape: BoxShape.rectangle,
                               boxShadow: [
                                 BoxShadow(
@@ -241,7 +238,6 @@ class _Form2State extends State<Form2> {
                     Container(
                       height: 55,
                       decoration: BoxDecoration(
-                          color: Colors.white, // Background color
                           borderRadius: BorderRadius.circular(30),
                           boxShadow: [
                             BoxShadow(

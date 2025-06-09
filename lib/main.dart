@@ -5,10 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
+// import 'package:intl/intl.dart';
+// import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: const FirebaseOptions(
         apiKey: 'AIzaSyARTdK-12Yag3a78cn78PHrT1W2V9bvSdk',
@@ -17,7 +22,7 @@ void main() async {
         projectId: 'businessdotcom-62fd1',
         storageBucket: "businessdotcom-62fd1.firebasestorage.app"),
   );
-  Get.put( DataController());
+  Get.put(DataController());
   runApp(ScreenUtilInit(
     designSize: const Size(393, 852),
     minTextAdapt: true,
@@ -26,8 +31,11 @@ void main() async {
       return GetMaterialApp(
         title: "Business.Com",
         localizationsDelegates: const [
-          MonthYearPickerLocalizations
-              .delegate, // Required for year picker localization
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+
+          MonthYearPickerLocalizations.delegate, // <--- Add this delegate
         ],
         supportedLocales: const [
           Locale('en', ''), // Add locales as needed

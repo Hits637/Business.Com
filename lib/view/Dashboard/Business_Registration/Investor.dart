@@ -45,7 +45,6 @@ void bottomSheet(BuildContext context, {required String? email}) {
                 Container(
                   height: 55,
                   decoration: BoxDecoration(
-                    color: Colors.white, // Background color
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
@@ -96,7 +95,6 @@ void bottomSheet(BuildContext context, {required String? email}) {
                 Container(
                   height: 55,
                   decoration: BoxDecoration(
-                    color: Colors.white, // Background color
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
@@ -147,7 +145,6 @@ void bottomSheet(BuildContext context, {required String? email}) {
                   height: 55,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Colors.white,
                       boxShadow: [
                         BoxShadow(
                           color: const Color.fromARGB(255, 218, 229, 242)
@@ -196,7 +193,6 @@ void bottomSheet(BuildContext context, {required String? email}) {
                   height: 55,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Colors.white,
                       boxShadow: [
                         BoxShadow(
                           color: const Color.fromARGB(255, 218, 229, 242)
@@ -244,7 +240,6 @@ void bottomSheet(BuildContext context, {required String? email}) {
                   height: 55,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Colors.white,
                       boxShadow: [
                         BoxShadow(
                           color: const Color.fromARGB(255, 218, 229, 242)

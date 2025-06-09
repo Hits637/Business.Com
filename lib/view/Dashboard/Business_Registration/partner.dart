@@ -44,7 +44,6 @@ void bottomSheetpartner(BuildContext context, {required String? email}) {
                 Container(
                   height: 55,
                   decoration: BoxDecoration(
-                    color: Colors.white, // Background color
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
@@ -95,7 +94,6 @@ void bottomSheetpartner(BuildContext context, {required String? email}) {
                 Container(
                   height: 55,
                   decoration: BoxDecoration(
-                    color: Colors.white, // Background color
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
@@ -146,7 +144,6 @@ void bottomSheetpartner(BuildContext context, {required String? email}) {
                 Container(
                   height: 55,
                   decoration: BoxDecoration(
-                    color: Colors.white, // Background color
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
@@ -196,7 +193,6 @@ void bottomSheetpartner(BuildContext context, {required String? email}) {
                 Container(
                   height: 55,
                   decoration: BoxDecoration(
-                    color: Colors.white, // Background color
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
