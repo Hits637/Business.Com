@@ -231,7 +231,9 @@ void bottomSheetpartner(BuildContext context, {required String? email}) {
                     ),
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

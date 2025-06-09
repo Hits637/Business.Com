@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:business_dot_com/Controller/session_data.dart';
 import 'package:business_dot_com/model/b2b_model.dart';
 import 'package:business_dot_com/model/comp_detail_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -257,3 +258,13 @@ Future<bool> roleCheck(String userId) async {
     return false;
   }
 }
+void loadUserData(String userId) async {
+    //await DataController.fetchUserData(userId);
+    log("in loadUserData");
+    await SessionData.storeSessionData(
+        loginData: true,
+        emailId: SessionData.emailId!,
+        role: (await roleCheck(userId)) == true? "admin" : "user");
+        log("${SessionData.role}");
+  }
+

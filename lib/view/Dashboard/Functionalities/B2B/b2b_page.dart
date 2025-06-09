@@ -218,14 +218,6 @@ class _B2bState extends State<B2b> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const MainPage()));
-          },
-          icon: const Icon(Icons.arrow_back_ios),
-          color: Colors.white,
-        ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -238,9 +230,10 @@ class _B2bState extends State<B2b> {
         ),
         title: const Text(
           "B2B",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(fontSize: 28, color: Colors.white),
         ),
         backgroundColor: Colors.blue,
+        centerTitle: true,
       ),
       body: ListView.builder(
         itemCount: b2bDetailList.length,

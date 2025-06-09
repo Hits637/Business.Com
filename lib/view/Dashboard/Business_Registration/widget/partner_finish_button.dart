@@ -57,7 +57,9 @@ class PartnerFinishButton {
           ClearText.clearText();
 
           await DataController.fetchCompData();
-          Navigator.of(context).popUntil((route) => route.isFirst,);
+          Navigator.of(context).popUntil(
+            (route) => route.isFirst,
+          );
           // await Navigator.push(context,
           //     MaterialPageRoute(builder: (context) => const MainPage()));
         } else {
@@ -68,34 +70,28 @@ class PartnerFinishButton {
         }
       },
       child: Container(
-        width: MediaQuery.of(context).size.width - 30,
-        height: 50,
+        height: 45,
+        width: 120,
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            // colors for gradient
-            colors: [
-              Color.fromARGB(255, 0, 45, 81),
-              Color.fromARGB(255, 0, 144, 247),
-            ],
-          ),
           boxShadow: [
             BoxShadow(
-              color: const Color.fromARGB(255, 145, 190, 243).withOpacity(1),
+              color: Colors.grey.withOpacity(1),
               spreadRadius: 1,
               blurRadius: 5,
               offset: const Offset(5, 8),
             )
           ],
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
           color: const Color.fromRGBO(32, 103, 234, 1),
         ),
         child: const Center(
           child: Text(
             "Finish",
             style: TextStyle(
-                fontSize: 25, fontWeight: FontWeight.w400, color: Colors.white),
+                fontSize: 22, fontWeight: FontWeight.w400, color: Colors.white),
           ),
         ),
+    
       ),
     );
   }

@@ -48,10 +48,7 @@ class InvestorFinishButton {
             "investmentRange": investorInvestmentRange.text.trim(),
             "mobileNo": mobileNo.text.trim()
           };
-          FirebaseFirestore.instance
-              .collection("CompanyDetails")
-              .doc(userId)
-              .set(data);
+          saveCompanyData(data, userId!);
           log("Stored Succesfully");
           log("$email");
           log("$data");
@@ -59,8 +56,8 @@ class InvestorFinishButton {
           ClearText.clearText();
 
           await DataController.fetchCompData();
-          await Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const MainPage()));
+             Navigator.of(context).popUntil((route) => route.isFirst,);
+
         } else {
           CustomSnackBar.showCustomSnackbar(
             title: "Oppsss...",

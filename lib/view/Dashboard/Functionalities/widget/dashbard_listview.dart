@@ -24,6 +24,7 @@ class HomePageController extends StatefulWidget {
 
 class _HomePageControllerState extends State<HomePageController> {
   String? email;
+  late String userName;
   bool isSearchClicked = true;
   String searchText = '';
   List<String> items = [
@@ -101,6 +102,7 @@ class _HomePageControllerState extends State<HomePageController> {
   void initState() {
     super.initState();
     filteredItems = List.from(items);
+    String userName = email!.split('@')[0].replaceAll(RegExp(r'[0-9]'), '');
   }
 
   void _onSearchChanged(String value) {
@@ -120,11 +122,10 @@ class _HomePageControllerState extends State<HomePageController> {
           .toList();
     }
   }
-   Future<void> _refresh() async{
+
+  Future<void> _refresh() async {
     await DataController.fetchCompData();
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   _HomePageControllerState({required this.email});
@@ -134,7 +135,7 @@ class _HomePageControllerState extends State<HomePageController> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        iconTheme:const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         title: Row(
@@ -162,12 +163,12 @@ class _HomePageControllerState extends State<HomePageController> {
         ),
       ),
       backgroundColor: Colors.transparent,
-      drawer:  const DrawerPage(),
+      drawer: const DrawerPage(),
       body: RefreshIndicator(
         onRefresh: _refresh,
         //backgroundColor: Colors.blue,
         //color: Colors.white,
-      
+
         child: Stack(children: [
           Image.asset(
             "assets/images/main_dashboard_vector.png",
@@ -176,43 +177,77 @@ class _HomePageControllerState extends State<HomePageController> {
             fit: BoxFit.cover,
           ),
           SingleChildScrollView(
-            child: 
-               Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 40.w, top: 90.h),
-                    child: Image.asset("assets/images/dashboard_3Dimg.png"),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(
-                      domainList.length,
-                      (index) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+              //crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 90.h),
+                  child: Column(
+                    //crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Stack(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15, left: 15),
-                            child: Text(
-                              domainList[index],
-                              style: GoogleFonts.poppins(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                              ),
-                            ),
+                          Image.asset(
+                            "assets/images/dashboard_3Dimg.png",
                           ),
-                          SizedBox(height: 10.h),
-                          MyWidget(
-                            email: email,
-                            majorListIndex: index,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 80),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Hello, $userName",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  "Let's Explore",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(
+                    domainList.length,
+                    (index) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15, left: 15),
+                          child: Text(
+                            domainList[index],
+                            style: GoogleFonts.poppins(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10.h),
+                        MyWidget(
+                          email: email,
+                          majorListIndex: index,
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            
+                ),
+              ],
+            ),
           ),
         ]),
       ),

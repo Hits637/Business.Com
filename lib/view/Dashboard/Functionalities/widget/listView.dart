@@ -1,6 +1,8 @@
 import 'package:business_dot_com/Controller/data_controller.dart';
 import 'package:business_dot_com/model/comp_detail_model.dart';
 import 'package:business_dot_com/view/Dashboard/CompDetails/description.dart';
+import 'package:business_dot_com/view/Dashboard/dashboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,11 +26,13 @@ class _MyWidgetState extends State<MyWidget> {
     highlightedIndex = -1;
     super.dispose(); // Always call super.dispose() at the end.
   }
-   Future<void> _refresh() async{
+
+  String userId = FirebaseAuth.instance.currentUser!.uid;
+
+  Future<void> _refresh() async {
     await DataController.fetchCompData();
-    setState(() {
-      
-    });
+    loadUserData(userId);
+    setState(() {});
   }
 
   String? email;
@@ -55,7 +59,7 @@ class _MyWidgetState extends State<MyWidget> {
                     SizedBox(
                       height: 215.h, // Dynamic card height
                       width: 230.w,
-      
+
                       child: GestureDetector(
                         onTap: () async {
                           Navigator.push(
@@ -117,7 +121,7 @@ class _MyWidgetState extends State<MyWidget> {
                                       Text(
                                         "Revenue:${majorCompDetailModelList[majorListIndex][index].revenue}",
                                         //{compShortDetailList[index].revenue}",
-                              
+
                                         style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12.w,
@@ -127,7 +131,7 @@ class _MyWidgetState extends State<MyWidget> {
                                       Text(
                                         "Looking for :${majorCompDetailModelList[majorListIndex][index].investmentRange == "" ? "Partner" : " investor"}",
                                         //{compShortDetailList[index].revenue}",
-                              
+
                                         style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12.w,

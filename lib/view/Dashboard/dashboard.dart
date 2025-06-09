@@ -29,7 +29,7 @@ class _MainPageState extends State<MainPage> {
   final _pageController = PageController(initialPage: 1);
   final _controller = NotchBottomBarController(index: 1);
   int maxCount = 3;
-  String userId = FirebaseAuth.instance.currentUser!.uid;
+  static String userId = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   void dispose() {
@@ -46,7 +46,7 @@ class _MainPageState extends State<MainPage> {
     loadCompData();
     loadFetchUserData();
     loadSessionData();
-    loadUserData();
+    loadUserData(userId);
   }
 
   void loadFetchUserData() async {
@@ -57,18 +57,18 @@ class _MainPageState extends State<MainPage> {
     await SessionData.getSessionData();
   }
 
-  void loadUserData() async {
-    //await DataController.fetchUserData(userId);
-    await SessionData.storeSessionData(
-        loginData: true,
-        emailId: SessionData.emailId!,
-        role: (await roleCheck(userId)) == true? "admin" : "user");
-        log("${SessionData.role}");
-  }
+  //  void loadUserData() async {
+  //   //await DataController.fetchUserData(userId);
+  //   await SessionData.storeSessionData(
+  //       loginData: true,
+  //       emailId: SessionData.emailId!,
+  //       role: (await roleCheck(userId)) == true? "admin" : "user");
+  //       log("${SessionData.role}");
+  // }
   // Future<void> _refresh() async{
   //   await DataController.fetchCompData();
   // }
-  void loadCompData()async{
+  void loadCompData() async {
     await DataController.fetchCompData();
   }
 
@@ -79,7 +79,7 @@ class _MainPageState extends State<MainPage> {
       HomePageController(
         email: email,
       ),
-       MainProfilePage(email: widget.email!),
+      MainProfilePage(email: widget.email!),
     ];
     return Scaffold(
       //drawer: const DrawerPage(),

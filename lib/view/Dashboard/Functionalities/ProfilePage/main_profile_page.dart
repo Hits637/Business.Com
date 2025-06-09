@@ -30,23 +30,23 @@ class _MainProfilePageState extends State<MainProfilePage> {
     await DataController.fetchUserData(userId);
   }
 
-  void loadUserData() async {
-    //await DataController.fetchUserData(userId);
-    final emailId = SessionData.emailId;
-    if (emailId != null) {
-      bool isAdmin = await roleCheck(userId);
-      String role = isAdmin ? "admin" : "user";
-      log("Role: $role");
-      await SessionData.storeSessionData(
-        loginData: true,
-        emailId: SessionData.emailId!,
-        role: role,
-      );
-      log("Stored sesstion Role: ${SessionData.role}");
-    } else {
-      log("Error: SessionData.emailId is null");
-    }
-  }
+  // void loadUserData() async {
+  //   //await DataController.fetchUserData(userId);
+  //   final emailId = SessionData.emailId;
+  //   if (emailId != null) {
+  //     bool isAdmin = await roleCheck(userId);
+  //     String role = isAdmin ? "admin" : "user";
+  //     log("Role: $role");
+  //     await SessionData.storeSessionData(
+  //       loginData: true,
+  //       emailId: SessionData.emailId!,
+  //       role: role,
+  //     );
+  //     log("Stored sesstion Role: ${SessionData.role}");
+  //   } else {
+  //     log("Error: SessionData.emailId is null");
+  //   }
+  // }
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _MainProfilePageState extends State<MainProfilePage> {
   }
 
   Future<void> loadSessionData() async {
-    loadUserData();
+    loadUserData(userId);
     await SessionData.getSessionData();
     log("GetSessionData Role: ${SessionData.role}");
   }
@@ -73,7 +73,10 @@ class _MainProfilePageState extends State<MainProfilePage> {
                 children: [
                   Stack(
                     children: [
-                      SvgPicture.asset('assets/svg/Light BG.svg'),
+                      SvgPicture.asset(
+                        'assets/svg/Light BG.svg',
+                        width: MediaQuery.of(context).size.width,
+                      ),
                       Column(children: [
                         SizedBox(
                             height: MediaQuery.of(context).size.width * 0.20),
@@ -134,13 +137,15 @@ class _MainProfilePageState extends State<MainProfilePage> {
                                                   .size
                                                   .width *
                                               0.6,
-                                          child: Text(
-                                            userCompList[index]
-                                                .pitchTextEditingController,
-                                            style: GoogleFonts.poppins(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 18.w,
-                                              color: Colors.black,
+                                          child: Expanded(
+                                            child: Text(
+                                              userCompList[index]
+                                                  .pitchTextEditingController,
+                                              style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 18.w,
+                                                color: Colors.black,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -151,13 +156,15 @@ class _MainProfilePageState extends State<MainProfilePage> {
                                                   .size
                                                   .width *
                                               0.6,
-                                          child: Text(
-                                            userCompList[index]
-                                                .descriptionTextEditingController,
-                                            style: GoogleFonts.poppins(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 15.w,
-                                              color: Colors.black,
+                                          child: Expanded(
+                                            child: Text(
+                                              userCompList[index]
+                                                  .descriptionTextEditingController,
+                                              style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 15.w,
+                                                color: Colors.black,
+                                              ),
                                             ),
                                           ),
                                         ),
